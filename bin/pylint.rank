@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pylint $1 | grep 'Your code has been rated at' | grep  -E -o -e '-?[0-9]+\.[0-9]+' | head -n 1 -
+

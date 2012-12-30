@@ -1,0 +1,12 @@
+#!/bin/sh
+# bakup current directory as a gzipped tar file
+# add date mark to the filename and put it on parent directory
+
+DIR=`pwd`
+NAME=`basename $DIR`
+DATE=`date +%y%m%d`
+
+tar czvf ../$NAME-$DATE.tar.gz  ../$NAME/
+echo
+ls -l -h ../$NAME-$DATE.tar.gz
+
