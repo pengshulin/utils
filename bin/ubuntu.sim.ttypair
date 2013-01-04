@@ -1,0 +1,7 @@
+#!/bin/sh
+# use socat to simulate and connect two TTYs
+ttyA='ttyA'
+ttyB='ttyB'
+echo "Simulate tty pair: /dev/shm/$ttyA <==> /dev/shm/$ttyB"
+socat PTY,link=/dev/shm/$ttyA  PTY,link=/dev/shm/$ttyB
+
