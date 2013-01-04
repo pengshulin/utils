@@ -1,0 +1,6 @@
+#!/bin/sh
+
+id=$1
+
+wget "tools.ietf.org/rfc/rfc$id.txt"
+    

@@ -1,0 +1,13 @@
+#!/bin/bash
+# set/reset /usr/share/fonts/myfonts symbol link and update font cache
+# Peng Shulin <trees_peng@163.com>
+
+sudo rm -f -r /usr/share/fonts/myfonts  # remove old link
+sudo ln -s `pwd`/myfonts /usr/share/fonts/myfonts
+
+pushd /usr/share/fonts/myfonts
+mkfontscale
+mkfontdir
+fc-cache
+popd
+
