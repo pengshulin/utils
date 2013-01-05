@@ -25,6 +25,7 @@ $CMD ttf-inconsolata ttf-unifont
 $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
 $CMD pdfshuffler rednotebook
 $CMD markdown python-markdown retext pandoc 
+$CMD antiword
 
 # python
 $CMD idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
