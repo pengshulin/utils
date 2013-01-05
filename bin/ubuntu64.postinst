@@ -12,26 +12,32 @@ $CMD enca convmv
 # version control
 $CMD git gitk subversion cvs scons
 
+# security
+$CMD encfs cryptkeeper
 
 $CMD dpkg-dev ia32-libs p7zip p7zip-rar libpcap-dev arp-scan nast
-$CMD gparted gsmartcontrol cutecom beep wireshark lm-sensors
+$CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors
 
 $CMD inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
-$CMD gpick
+$CMD gpick agave
 $CMD imagemagick graphviz
 $CMD ttf-inconsolata ttf-unifont
 $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
 $CMD pdfshuffler rednotebook
+$CMD markdown python-markdown retext pandoc 
 
 # python
 $CMD idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
 $CMD python-matplotlib python-wxglade python-pygame python-beautifulsoup
 $CMD python-ctypes python-cheetah python-markdown python-memcache python-svn
 $CMD python-setuptools python-unit python-unittest2 python-testtools
-$CMD python-csv 
+$CMD python-csv python-pip 
 $CMD python-examples wx2.8-examples
-$CMD python-pygraphviz python-pygraph python-gvgen
+$CMD python-pygraphviz python-pygraph python-gvgen python-fontforge
 $CMD python-pyinotify python-inotifyx
+
+# ruby
+$CMD ruby rubygems 
 
 # scientific
 $CMD octave3.2 gnuplot-nox gnuplot-x11
@@ -62,7 +68,7 @@ $CMD sshd
 #$CMD wine 
 #$CMD openfetion
 $CMD php5 apache2
-$CMD sqliteman
+$CMD sqliteman sqlitebrowser
 
 # documents
 $CMD bash-doc zsh-doc 
@@ -75,4 +81,7 @@ $CMD python-numpy-doc python-reportlab-doc python-distribute-doc
 $CMD sdcc-doc doxygen-doc octave3.2-doc
 
 $CMD debian-policy
+
+# education
+$CMD kig
 
