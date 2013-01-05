@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # packages needed after ubuntu-live-cd installation
 # Peng Shulin <trees_peng@163.com>
 
@@ -15,7 +15,12 @@ $CMD git gitk subversion cvs scons
 # security
 $CMD encfs cryptkeeper
 
-$CMD dpkg-dev ia32-libs p7zip p7zip-rar libpcap-dev arp-scan nast
+# 64-bit system only
+if [[ `uname -m` == 'x86_64' ]];
+then $CMD ia32-libs ;
+fi
+
+$CMD dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
 $CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors
 
 $CMD inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
