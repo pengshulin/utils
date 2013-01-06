@@ -1,0 +1,26 @@
+#!/bin/bash
+# run the shell in the directory where arm-*.tar.bz2 are placed
+# 
+
+FILE_NAME=`ls arm-*-arm-none-eabi-i686-pc-linux-gnu.tar.bz2`
+FILE_NAME2=`ls arm-*-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2`
+FILE_PATHNAME=`pwd`/$FILE_NAME
+FILE_PATHNAME2=`pwd`/$FILE_NAME2
+FILE_PREFIX=`echo $FILE_NAME | grep -o -e 'arm-20..\...'`
+
+# init directories
+sudo mkdir -p /usr/local/tools
+sudo mkdir -p /usr/local/tools/$FILE_PREFIX
+sudo ln -s -d /usr/local/tools/$FILE_PREFIX /usr/local/tools/arm
+
+# unpack
+pushd /usr/local/tools
+sudo tar jxvf $FILE_PATHNAME
+sudo tar jxvf $FILE_PATHNAME2
+popd
+
+# create symbol links
+pushd /usr/local/bin
+sudo find ../tools/arm/bin -type f -print -exec ln -s {} \;
+popd
+
