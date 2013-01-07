@@ -41,6 +41,7 @@ $CMD python-csv python-pip
 $CMD python-examples wx2.8-examples
 $CMD python-pygraphviz python-pygraph python-gvgen python-fontforge
 $CMD python-pyinotify python-inotifyx
+$CMD ipython
 
 # ruby
 $CMD ruby rubygems 
@@ -48,7 +49,6 @@ $CMD ruby rubygems
 # scientific
 $CMD octave3.2 gnuplot-nox gnuplot-x11
 
-$CMD codeblocks eclipse virtualbox
 
 $CMD cflow python-pycallgraph swig
 
@@ -90,4 +90,8 @@ $CMD debian-policy
 
 # education
 $CMD kig
+
+# big packages 
+$CMD codeblocks eclipse virtualbox
+
 
