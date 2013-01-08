@@ -52,8 +52,13 @@ $CMD octave3.2 gnuplot-nox gnuplot-x11
 
 $CMD cflow python-pycallgraph swig
 
+$CMD splint
+
 # embedded system dev.
-$CMD gcc-msp430 gdb-msp430 mspdebug  openocd sdcc splint
+$CMD arduino
+$CMD openocd sdcc usbprog usbprog-gui
+$CMD gcc-msp430 gdb-msp430 mspdebug
+$CMD gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
 # libreadline5:i386 is used by jlink
 $CMD libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5:i386
 

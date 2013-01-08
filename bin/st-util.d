@@ -6,8 +6,8 @@
 reload_counter=0
 
 # main loop
-while [ 1 ] ;do
-  echo "Starting st-util daemons"
+while [ 1 ]; do
+  echo "Starting st-util..."
   st-util
   echo "st-util stopped"
   echo
