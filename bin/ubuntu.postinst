@@ -42,6 +42,7 @@ $CMD python-examples wx2.8-examples
 $CMD python-pygraphviz python-pygraph python-gvgen python-fontforge
 $CMD python-pyinotify python-inotifyx
 $CMD ipython
+$CMD eric 
 
 # ruby
 $CMD ruby rubygems 
