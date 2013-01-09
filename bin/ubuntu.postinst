@@ -8,6 +8,7 @@ CMD='sudo apt-get -q -y -m install'
 $CMD htop tree ctags astyle sloccount hexedit ghex ascii zsh socat ssh
 $CMD vim vim-gtk emacs emacs23-nox emacs23-el
 $CMD enca convmv
+$CMD screen tmux
 
 # version control
 $CMD git gitk subversion cvs scons
