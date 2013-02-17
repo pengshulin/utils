@@ -39,7 +39,7 @@ $CMD idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
 $CMD python-matplotlib python-wxglade python-pygame python-beautifulsoup
 $CMD python-ctypes python-cheetah python-markdown python-memcache python-svn
 $CMD python-setuptools python-unit python-unittest2 python-testtools
-$CMD python-csv python-pip 
+$CMD python-pip 
 $CMD python-examples wx2.8-examples
 $CMD python-pygraphviz python-pygraph python-gvgen python-fontforge
 $CMD python-pyinotify python-inotifyx
@@ -60,7 +60,8 @@ $CMD splint
 # embedded system dev.
 $CMD arduino
 $CMD openocd sdcc usbprog usbprog-gui
-$CMD gcc-msp430 gdb-msp430 mspdebug
+$CMD gcc-msp430 mspdebug
+$CMD gdb-msp430
 $CMD gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
 # libreadline5:i386 is used by jlink
 $CMD libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5:i386
@@ -72,7 +73,8 @@ $CMD lua5.1
 # LISP/Scheme
 $CMD clisp clisp-doc sbcl sbcl-doc 
 $CMD slime
-$CMD guile-1.8 guile-1.8-doc guile-1.8-dev mit-scheme:i386 mit-scheme-doc 
+$CMD guile-1.8 guile-1.8-doc guile-1.8-dev
+$CMD mit-scheme:i386 mit-scheme-doc 
 $CMD scheme2c scheme48 scheme9 tinyscheme scm slib 
 $CMD racket racket-doc
 
@@ -88,7 +90,6 @@ $CMD sqliteman sqlitebrowser
 $CMD bash-doc zsh-doc 
 $CMD binutils-doc gcc-doc gdb-doc vim-doc make-doc scons-doc
 $CMD glibc-doc wx2.8-doc splint-doc-html imagemagick-doc graphviz-doc
-$CMD openssl-doc
 
 $CMD python-doc python-gtk2-doc python-imaging-doc python-matplotlib-doc
 $CMD python-numpy-doc python-reportlab-doc python-distribute-doc

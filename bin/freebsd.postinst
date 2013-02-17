@@ -1,0 +1,22 @@
+#!/bin/sh
+PACKAGESITE='ftp://ftp.cn.freebsd.org/pub/FreeBSD/ports/i386/packages-9-stable/Latest/' 
+
+CMD="env PACKAGESITE=$PACKAGESITE pkg_add -r"
+
+$CMD vim git zsh ctags
+$CMD tmux
+$CMD enca 
+$CMD ipython-py27
+$CMD py27-pip 
+$CMD py27-numpy py27-scipy py27-gtk py27-wxPython py27-game
+$CMD py27-beautifulsoup
+$CMD pylint-py27
+$CMD guile clisp
+$CMD antiword
+
+
+$CMD msp430-binutils msp430-gcc msp430-gdb msp430-libc mspdebug msp430mcu
+$CMD avr-binutils avr-gcc avr-gdb avr-libc avra avrdude
+$CMD arm-elf-binutils arm-rtems-binutils arm-rtems-gcc arm-rtems-gdb
+
+$CMD xorg xfce4
