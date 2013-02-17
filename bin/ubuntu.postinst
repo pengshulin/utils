@@ -26,6 +26,7 @@ $CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors
 
 $CMD inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
 $CMD gpick agave
+$CMD scrot
 $CMD imagemagick graphviz
 $CMD ttf-inconsolata ttf-unifont
 $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
