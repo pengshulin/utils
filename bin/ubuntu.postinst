@@ -33,6 +33,7 @@ $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
 $CMD pdfshuffler rednotebook
 $CMD markdown python-markdown retext pandoc 
 $CMD antiword
+$CMD meld
 
 # python
 $CMD idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
