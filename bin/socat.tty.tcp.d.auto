@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+'''
+bind all serial ports with tcp-port
+designed by Peng Shulin
+'''
+import subprocess, pyinotify, re, glob
+
+BASE_PORT = 9000
+LISTENERS = {}
+MATCHER = re.compile( "/dev/ttyUSB([0-9]+?)" )
+
+def addListener( index ):
+    if LISTENERS.has_key( index ):
+        removeListener( index )
+    command = ['socat.tty.tcp.d', 
+               '/dev/ttyUSB%d'% index, 
+               '%d'% (9000+index) ]
+    proc = subprocess.Popen( command, shell=False )
+    print 'PID', proc.pid
+    LISTENERS[index] = proc
+    
+def removeListener( index ):
+    if LISTENERS.has_key( index ):
+        proc = LISTENERS.pop( index )
+        #print subprocess.check_output(['ps', '--ppid %d'% proc.pid, 
+        #                           '-o pid', '--no-headers'], shell=True)
+        proc.kill()
+        proc.wait()
+        proc = None
+       
+def nameToIndex( name ):
+    match = MATCHER.match( name )
+    return int(match.group(1)) if match else None
+
+class Handler(pyinotify.ProcessEvent):
+        
+    def process_IN_CREATE(self, event):
+        index = nameToIndex( event.pathname )
+        if index is not None:
+            print "ADD", index
+            addListener( index )
+
+    def process_IN_DELETE(self, event):
+        index = nameToIndex( event.pathname )
+        if index is not None:
+            print "REMOVE", index
+            removeListener( index )
+
+for device in glob.glob('/dev/ttyUSB*'):
+    index = nameToIndex( device )
+    if index is not None:
+        print "INIT", index
+        addListener( index )
+ 
+WM = pyinotify.WatchManager()
+HANDLER = Handler()
+NOTIFY = pyinotify.Notifier( WM, default_proc_fun=HANDLER )
+WM.add_watch( '/dev', pyinotify.IN_CREATE + pyinotify.IN_DELETE, rec=True, auto_add=True )
+NOTIFY.loop()
+
