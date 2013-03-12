@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if ! which cflow2png >/dev/null; then
+    echo 'cflow2png not installed'
+    exit
+fi
+
+cflow2png *.c
+
