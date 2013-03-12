@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if ! which cflow2dot >/dev/null; then
+    echo 'cflow2dot not installed'
+    exit
+fi
+
+if [ $# = 0 ]; then
+    echo $0 cfile1 cfile2 ...
+    exit
+fi
+
+while [ $# -gt 0 ]; do
+    cflow2dot $1 && inkscape --export-png=$1.png /tmp/cflow.svg 
+    shift
+done
+
+

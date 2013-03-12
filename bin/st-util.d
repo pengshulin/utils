@@ -4,18 +4,14 @@
 
 # counts reload times
 reload_counter=0
+cmd=st-util
 
 # main loop
 while [ 1 ]; do
-  echo "Starting st-util..."
-  st-util
-  echo "st-util stopped"
+  echo "[$reload_counter]" "$cmd"
+  $cmd
   echo
-  # /bin/sh is aliased to dash, so 'let' is invalid
-  #let reload_counter++
   reload_counter=$((reload_counter+1)) 
-  echo "Reload for the $reload_counter time"
-  # wait for a while
-  sleep 3
+  sleep 3  # wait for a while
 done
 
