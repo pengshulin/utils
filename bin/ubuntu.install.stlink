@@ -1,0 +1,14 @@
+#!/bin/bash
+# ref to https://github.com/texane/stlik.git
+
+pushd ~
+git clone git://github.com/texane/stlink.git ~/.stlink
+pushd .stlink
+./autogen.sh
+./configure
+# TODO: patch 
+make
+sudo make install
+popd
+popd
+
