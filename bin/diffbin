@@ -1,8 +1,10 @@
 #!/bin/sh
 # diff between two binary files
 
+CMDNAME=`basename $0`
+
 if [ $# != 2 ] ; then
-    echo 'diffbin FILE1 FILE2'
+    echo "$CMDNAME FILE1 FILE2"
     exit 1
 fi
 
@@ -13,13 +15,11 @@ DUMP2="$PREFIX-2.dump"
 test -f $1 || exit 1
 test -f $2 || exit 1
 
-test -f $DUMP1 && rm $DUMP1 
-test -f $DUMP2 && rm $DUMP2
-
 hexdump -C $1 > $DUMP1
 hexdump -C $2 > $DUMP2
 
-diff $DUMP1 $DUMP2
-
-#rm $DUMP1 $DUMP2
-
+if [ $CMDNAME = 'colordiffbin' ] ; then
+    colordiff $DUMP1 $DUMP2
+else
+    diff $DUMP1 $DUMP2
+fi
