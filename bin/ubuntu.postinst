@@ -4,37 +4,40 @@
 
 CMD='sudo apt-get -q -y -m install'
 
-# system tools
-$CMD htop tree ctags astyle sloccount hexedit ghex ascii zsh socat ssh
-$CMD vim vim-gtk emacs emacs23-nox emacs23-el
-$CMD enca convmv
-$CMD screen tmux
-
-# version control
-$CMD git gitk subversion cvs scons
-
-# security
-$CMD encfs cryptkeeper
-
 # 64-bit system only
 if [[ `uname -m` == 'x86_64' ]];
 then $CMD ia32-libs ;
 fi
 
+# system tools
+$CMD vim vim-gtk emacs emacs23-nox emacs23-el
+$CMD htop tree ctags astyle sloccount hexedit ghex ascii zsh socat
+$CMD screen tmux
+$CMD ssh sshd
+$CMD git gitk subversion cvs scons
 $CMD dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
-$CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors
+$CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors filelight
+$CMD enca convmv
+$CMD meld colordiff
 
+# security
+$CMD encfs cryptkeeper
+
+# office/image
 $CMD inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
 $CMD gpick agave
 $CMD scrot
 $CMD imagemagick graphviz
 $CMD ttf-inconsolata ttf-unifont
 $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
-$CMD pdfshuffler rednotebook
+$CMD pdfmod pdfshuffler rednotebook
 $CMD markdown python-markdown retext pandoc 
 $CMD antiword
-$CMD meld colordiff
 
+# programming languages
+# c
+$CMD cflow python-pycallgraph swig
+$CMD splint
 # python
 $CMD idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
 $CMD python-matplotlib python-wxglade python-pygame python-beautifulsoup
@@ -46,32 +49,11 @@ $CMD python-pygraphviz python-pygraph python-gvgen python-fontforge
 $CMD python-pyinotify python-inotifyx
 $CMD ipython
 $CMD eric 
-
+# lua
+$CMD lua5.1 
 # ruby
 $CMD ruby rubygems 
-
-# scientific
-$CMD octave3.2 gnuplot-nox gnuplot-x11
-
-
-$CMD cflow python-pycallgraph swig
-
-$CMD splint
-
-# embedded system dev.
-$CMD arduino
-$CMD openocd sdcc usbprog usbprog-gui
-$CMD gcc-msp430 mspdebug
-$CMD gdb-msp430
-$CMD gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
-# libreadline5:i386 is used by jlink
-$CMD libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5:i386
-
-$CMD ncurses-dev
-
-$CMD lua5.1 
-
-# LISP/Scheme
+# lisp
 $CMD clisp clisp-doc sbcl sbcl-doc 
 $CMD slime
 $CMD guile-1.8 guile-1.8-doc guile-1.8-dev
@@ -79,9 +61,23 @@ $CMD mit-scheme:i386 mit-scheme-doc
 $CMD scheme2c scheme48 scheme9 tinyscheme scm slib 
 $CMD racket racket-doc
 
+# libraries
+# libreadline5:i386 is used by jlink
+$CMD libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5:i386
+$CMD ncurses-dev
+
+# embedded system dev.
+$CMD arduino
+$CMD openocd sdcc usbprog usbprog-gui
+$CMD gcc-msp430 mspdebug
+$CMD gdb-msp430
+$CMD gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
+
+# scientific
+$CMD octave3.2 gnuplot-nox gnuplot-x11
+
 # copy vsftpd configuration files to /etc/vsftpd.*
 $CMD vsftpd
-$CMD sshd
 #$CMD wine 
 #$CMD openfetion
 $CMD php5 apache2
@@ -91,11 +87,9 @@ $CMD sqliteman sqlitebrowser
 $CMD bash-doc zsh-doc 
 $CMD binutils-doc gcc-doc gdb-doc vim-doc make-doc scons-doc
 $CMD glibc-doc wx2.8-doc splint-doc-html imagemagick-doc graphviz-doc
-
 $CMD python-doc python-gtk2-doc python-imaging-doc python-matplotlib-doc
 $CMD python-numpy-doc python-reportlab-doc python-distribute-doc
 $CMD sdcc-doc doxygen-doc octave3.2-doc
-
 $CMD debian-policy
 
 # education
