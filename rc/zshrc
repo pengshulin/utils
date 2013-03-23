@@ -1,0 +1,7 @@
+alias vi='vim'
+alias vi.='vim .'
+alias v.='vim .'
+alias mktags='ctags -R'
+alias cal='cal -3'
+
+export PATH=$PATH:/opt/rtems-4.11/bin

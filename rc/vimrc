@@ -1,0 +1,7 @@
+color torte
+syntax on
+set mouse=a
+set number
+map <C-o><C-d>  <ESC>:vi .<CR>
+autocmd  FileType python compiler pylint
+

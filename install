@@ -3,5 +3,7 @@
 DESTDIR=/usr/local/bin
 find bin -type f -print -exec install {} $DESTDIR/ \;
 
-ln -s /usr/local/bin/diffbin /usr/local/bin/colordiffbin 
-
+if [ -L $DESTDIR/colordiffbin ] ; then
+    rm $DESTDIR/colordiffbin
+fi    
+ln -s $DESTDIR/diffbin $DESTDIR/colordiffbin 
