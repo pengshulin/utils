@@ -5,3 +5,10 @@ alias mktags='ctags -R'
 alias cal='cal -3'
 
 export PATH=$PATH:/opt/rtems-4.11/bin
+
+
+alias weather.shanghai="wget -O - http://www.weather.com.cn/weather/101020100.shtml | html2text | less"
+
+
+
+
