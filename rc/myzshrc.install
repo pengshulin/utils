@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Peng Shulin <trees_peng@163.com>
 
 if ! [ -f myzshrc ]; then
@@ -6,7 +6,7 @@ if ! [ -f myzshrc ]; then
     exit 1
 fi
 
-test -e ~/.myzshrc && rm ~/.myzshrc
+rm ~/.myzshrc
 ln -s `pwd`/myzshrc ~/.myzshrc
 
 if [ -f ~/.zshrc ]; then

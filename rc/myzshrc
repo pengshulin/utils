@@ -1,3 +1,4 @@
+alias l='ls'
 alias vi='vim'
 alias vi.='vim .'
 alias v.='vim .'

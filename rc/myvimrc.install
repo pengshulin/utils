@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Peng Shulin <trees_peng@163.com>
 
 if ! [ -f myvimrc ]; then
@@ -6,7 +6,7 @@ if ! [ -f myvimrc ]; then
     exit 1
 fi
 
-test -e ~/.myvimrc && rm ~/.myvimrc
+rm ~/.myvimrc
 ln -s `pwd`/myvimrc ~/.myvimrc
     
 if [ -f ~/.vimrc ]; then
