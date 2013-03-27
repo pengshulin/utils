@@ -4,6 +4,8 @@ alias vi.='vim .'
 alias v.='vim .'
 alias mktags='ctags -R'
 alias cal='cal -3'
+alias du='du -h'
+alias df='df -h'
 
 export PATH=$PATH:/opt/rtems-4.11/bin
 
