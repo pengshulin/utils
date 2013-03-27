@@ -6,7 +6,7 @@ if ! [ -f myvimrc ]; then
     exit 1
 fi
 
-rm ~/.myvimrc
+test -e ~/.myvimrc  &&  rm ~/.myvimrc
 ln -s `pwd`/myvimrc ~/.myvimrc
     
 if [ -f ~/.vimrc ]; then

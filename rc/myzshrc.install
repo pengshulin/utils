@@ -6,7 +6,7 @@ if ! [ -f myzshrc ]; then
     exit 1
 fi
 
-rm ~/.myzshrc
+test -e ~/.myzshrc  &&  rm ~/.myzshrc
 ln -s `pwd`/myzshrc ~/.myzshrc
 
 if [ -f ~/.zshrc ]; then
