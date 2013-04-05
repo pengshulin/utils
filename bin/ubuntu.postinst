@@ -19,6 +19,7 @@ $CMD dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
 $CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors filelight
 $CMD enca convmv
 $CMD meld colordiff
+$CMD medit xournal alarm-clock-applet
 
 # security
 $CMD encfs cryptkeeper
