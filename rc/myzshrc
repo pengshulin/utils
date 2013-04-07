@@ -1,17 +1,25 @@
 alias l='ls'
 alias vi='vim'
 alias vi.='vim .'
+alias v='vim'
 alias v.='vim .'
 alias mktags='ctags -R'
-alias cal='cal -3'
+alias cal3='cal -3'
 alias du='du -h'
 alias df='df -h'
 
-export PATH=$PATH:/opt/rtems-4.11/bin
-
-
 alias weather.shanghai="wget -O - http://www.weather.com.cn/weather/101020100.shtml | html2text | less"
+alias wiki='elinks http://en.wikipedia.org/wiki/Main_Page#p-search'
+alias pyscheme='python -c "import pyscheme; pyscheme.scheme.repl()"'
 
-
+export EDITOR=vi
+export PATH=$PATH:/opt/rtems-4.11/bin
+#export PATH=$PATH:$DIR_UTILS
+#export PATH=$PATH:$DIR_UTILS/JLink_Linux_V441g
+#export PATH=$PATH:$DIR_UTILS/arm-2012.03/bin
+#export PATH=$PATH:$DIR_UTILS/devkitpro/devkitARM/bin
+#export PATH=$PATH:$DIR_UTILS/android-sdk-linux/platform-tools
+#export PATH=$PATH:$DIR_UTILS/android-sdk-linux/tools
+#export AP_PORT=9999
 
 
