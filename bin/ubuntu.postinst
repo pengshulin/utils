@@ -20,6 +20,7 @@ $CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors filelight
 $CMD enca convmv
 $CMD meld colordiff
 $CMD medit xournal alarm-clock-applet
+$CMD autoconf
 
 # security
 $CMD encfs cryptkeeper
