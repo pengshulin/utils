@@ -1,10 +1,14 @@
 color torte
 syntax on
 
-"set guifont=inconsolata\ 14
+set guifont=inconsolata\ 14
 set mouse=a
 set number
 autocmd FileType python compiler pylint
+
+set et
+set ts=4
+set sw=4
 
 map <C-o><C-d>  <ESC>:o .<CR>
 "map <C-v>  <ESC><C-d><C-d>kkk
