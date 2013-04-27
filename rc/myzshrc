@@ -18,7 +18,6 @@ alias pyscheme='python -c "import pyscheme; pyscheme.scheme.repl()"'
 export EDITOR=vi
 #export PATH=$PATH:/opt/rtems-4.11/bin
 #export PATH=$PATH:$DIR_UTILS
-#export PATH=$PATH:$DIR_UTILS/JLink_Linux_V441g
 #export PATH=$PATH:$DIR_UTILS/arm-2012.03/bin
 #export PATH=$PATH:$DIR_UTILS/devkitpro/devkitARM/bin
 #export PATH=$PATH:$DIR_UTILS/android-sdk-linux/platform-tools

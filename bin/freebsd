@@ -1,0 +1,5 @@
+#!/bin/sh
+
+virtualbox --startvm freebsd
+
+
