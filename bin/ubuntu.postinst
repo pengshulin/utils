@@ -100,4 +100,7 @@ $CMD kig
 # big packages 
 $CMD codeblocks eclipse virtualbox
 
+# EDAs
+$CMD pcb gerbv geda kicad qucs
+
 

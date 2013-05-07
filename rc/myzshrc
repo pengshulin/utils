@@ -10,6 +10,8 @@ alias cal3='cal -3'
 alias du='du -h'
 alias df='df -h'
 alias dpython='python -m pdb'
+alias lstty='ls /dev/tty*'
+alias lsttyusb='ls /dev/ttyUSB*'
 
 alias weather.shanghai="wget -O - http://www.weather.com.cn/weather/101020100.shtml | html2text | less"
 alias wiki='elinks http://en.wikipedia.org/wiki/Main_Page#p-search'
