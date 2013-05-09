@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# check if it is in develop branch
+CURRENT_BRANCH=`git branch | grep "*" | cut -b 3-`
+if [[ $CURRENT_BRANCH != 'develop' ]]; then
+    echo 'Run the script in develop branch please!!!'
+    exit
+fi
+
+# check if the branch is up-to-date
+NOTHING_TO_COMMIT=`git status | grep -o 'nothing to commit'`
+if [[ $NOTHING_TO_COMMIT == '' ]]; then
+    git status
+    exit
+fi
+
+git_command()
+{
+echo '============================================================'
+echo "git $@"
+git $@
+}
+
+
+git_command push origin develop 
+
+git_command checkout master
+
+git_command merge --no-ff develop
+
+git_command push origin master
+
+git_command checkout develop
+
+
