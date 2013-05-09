@@ -75,8 +75,12 @@ $CMD gcc-msp430 mspdebug
 $CMD gdb-msp430
 $CMD gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
 
+# electronics
+$CMD pcb gerbv geda kicad qucs
+
 # scientific
 $CMD octave3.2 gnuplot-nox gnuplot-x11
+$CMD veusz
 
 # copy vsftpd configuration files to /etc/vsftpd.*
 $CMD vsftpd
@@ -99,8 +103,5 @@ $CMD kig
 
 # big packages 
 $CMD codeblocks eclipse virtualbox
-
-# EDAs
-$CMD pcb gerbv geda kicad qucs
 
 
