@@ -3,7 +3,7 @@
 # check if it is in develop branch
 CURRENT_BRANCH=`git branch | grep "*" | cut -b 3-`
 if [[ $CURRENT_BRANCH != 'develop' ]]; then
-    echo 'Run the script in develop branch please!!!'
+    echo -e '\e[31mRun the script in develop branch please!!!\e[0m'
     exit
 fi
 
@@ -16,8 +16,8 @@ fi
 
 git_command()
 {
-echo '============================================================'
-echo "git $@"
+echo -e '\e[34m==========================================================\e[0m'
+echo -e "\e[34mgit $@\e[0m"
 git $@
 }
 
