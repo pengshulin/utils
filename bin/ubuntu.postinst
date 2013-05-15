@@ -26,7 +26,7 @@ $CMD autoconf
 $CMD encfs cryptkeeper
 
 # office/image
-$CMD inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
+$CMD gimp inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
 $CMD gpick agave
 $CMD scrot
 $CMD imagemagick graphviz
@@ -35,6 +35,9 @@ $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
 $CMD pdfmod pdfshuffler rednotebook
 $CMD markdown python-markdown retext pandoc 
 $CMD antiword
+
+# media
+$CMD vlc smplayer
 
 # programming languages
 # c
