@@ -11,7 +11,7 @@ fi
 
 # system tools
 $CMD vim vim-gtk emacs emacs23-nox emacs23-el
-$CMD htop tree ctags astyle sloccount hexedit ghex ascii zsh socat
+$CMD htop tree ctags astyle sloccount hexedit ghex ascii zsh socat xbindkeys
 $CMD screen tmux
 $CMD ssh sshd
 $CMD git gitk subversion cvs scons

@@ -1,0 +1,43 @@
+# List of modifier:
+#   Release, Control, Shift, Mod1 (Alt), Mod2 (NumLock),
+#   Mod3 (CapsLock), Mod4, Mod5 (Scroll).
+
+#keystate_numlock = enable
+#keystate_capslock = enable
+#keystate_scrolllock= enable
+
+"xbindkeys_show" 
+  control + shift + q
+
+"thunar"
+  control + alt + e 
+
+"xfce4-terminal"
+  control + alt + t 
+"xfce4-terminal -x htop"
+  control + alt + h 
+"xfce4-terminal -x ipython"
+  control + alt + p
+"xfce4-screenshooter -f"
+  Print
+"xfce4-screenshooter -r"
+  control + Print
+"xfce4-screenshooter -w"
+  alt + Print
+
+
+"amixer -c 1 set Speaker toggle"
+  alt + m 
+"amixer -c 1 set Speaker 5%- unmute"
+  alt + comma
+"amixer -c 1 set Speaker 5%+ unmute"
+  alt + period
+"gmusicbrowser -cmd PlayPause"
+  alt + shift + m
+"gmusicbrowser -cmd PrevSong"
+  alt + shift + comma
+"gmusicbrowser -cmd NextSong"
+  alt + shift + period
+
+
+

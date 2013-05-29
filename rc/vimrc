@@ -11,6 +11,7 @@ set ts=4
 set sw=4
 
 map <C-o><C-d>  <ESC>:o .<CR>
+map <C-o><C-c>  <ESC>:o<CR>
 "map <C-v>  <ESC><C-d><C-d>kkk
 "map <C-c><C-l>  <ESC>:%s/\s\+$//g<CR>
 

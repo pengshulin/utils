@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Peng Shulin <trees_peng@163.com>
+
+if ! [ $# -eq 1 ]; then 
+    echo "Usage: myrc.install XXXRC"
+    echo "set environment APPEND=1 for append mode"
+    exit
+fi
+
+RC=$1
+
+# check rc file
+if ! [ -f $RC ]; then
+    echo "no $RC found in current directory"
+    exit
+fi
+
+# make symbol link in HOME directory
+# bakup if normal rc file exists
+test -e ~/.my$RC && mv ~/.my$RC ~/.my$RC.orig
+# delete if symbol rc file exists
+test -h ~/.my$RC && rm ~/.my$RC
+# make new link
+ln -s `pwd`/$RC ~/.my$RC
+
+# link to actual RC file 
+if [ -z "$APPEND" ] ; then
+    # direct link
+    if [ -f ~/.$RC ]; then
+        rm ~/.$RC
+    fi
+    ln -s ~/.my$RC ~/.$RC
+else
+    # append to source
+    if [ -f ~/.$RC ]; then
+        if ! grep "source ~/.my$RC" ~/.$RC >/dev/null ; then
+            echo "source ~/.my$RC" >> ~/.$RC
+        fi
+    fi
+fi
+
