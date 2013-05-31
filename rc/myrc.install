@@ -16,10 +16,10 @@ if ! [ -f $RC ]; then
 fi
 
 # make symbol link in HOME directory
-# bakup if normal rc file exists
-test -e ~/.my$RC && mv ~/.my$RC ~/.my$RC.orig
 # delete if symbol rc file exists
 test -h ~/.my$RC && rm ~/.my$RC
+# bakup if normal rc file exists
+test -e ~/.my$RC && mv ~/.my$RC ~/.my$RC.orig
 # make new link
 ln -s `pwd`/$RC ~/.my$RC
 
@@ -32,6 +32,7 @@ if [ -z "$APPEND" ] ; then
     ln -s ~/.my$RC ~/.$RC
 else
     # append to source
+    touch ~/.$RC
     if [ -f ~/.$RC ]; then
         if ! grep "source ~/.my$RC" ~/.$RC >/dev/null ; then
             echo "source ~/.my$RC" >> ~/.$RC

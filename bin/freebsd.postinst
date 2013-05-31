@@ -1,5 +1,5 @@
 #!/bin/sh
-PACKAGESITE='ftp://ftp.cn.freebsd.org/pub/FreeBSD/ports/i386/packages-9-stable/Latest/' 
+PACKAGESITE='ftp://ftp.cn.freebsd.org/pub/FreeBSD/ports/amd64/packages-9.1-release/Latest/' 
 
 CMD="env PACKAGESITE=$PACKAGESITE pkg_add -r"
 
