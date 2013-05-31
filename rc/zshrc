@@ -1,4 +1,7 @@
-alias ls='ls -G'
+if [ `uname` = 'FreeBSD' ]; then
+    alias ls='ls -G'
+fi
+
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
