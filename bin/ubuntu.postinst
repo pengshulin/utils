@@ -35,6 +35,7 @@ $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
 $CMD pdfmod pdfshuffler rednotebook
 $CMD markdown python-markdown retext pandoc 
 $CMD antiword
+$CMD samba system-config-samba
 
 # media
 $CMD vlc smplayer

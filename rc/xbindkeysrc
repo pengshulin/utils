@@ -26,11 +26,11 @@
   alt + Print
 
 
-"amixer -c 1 set Speaker toggle"
+"amixer -c 0 set Master toggle"
   alt + m 
-"amixer -c 1 set Speaker 5%- unmute"
+"amixer -c 0 set Master 5%- unmute"
   alt + comma
-"amixer -c 1 set Speaker 5%+ unmute"
+"amixer -c 0 set Master 5%+ unmute"
   alt + period
 "gmusicbrowser -cmd PlayPause"
   alt + shift + m
