@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # run st-util gdbserver looply
 #
 
@@ -8,10 +8,10 @@ cmd=st-util
 
 # main loop
 while [ 1 ]; do
-  echo "[$reload_counter]" "$cmd"
+  echo -e "\e[34m[$reload_counter]" "$cmd\e[0m"
   $cmd
-  echo
+  echo -e "\e[31mStopped.\e[0m"
   reload_counter=$((reload_counter+1)) 
-  sleep 3  # wait for a while
+  sleep 0.5  # wait for a while
 done
 

@@ -18,6 +18,13 @@ alias df='df -h'
 alias dpython='python -m pdb'
 alias lstty='ls /dev/tty*'
 alias lsttyusb='ls /dev/ttyUSB*'
+alias du.sort.less='du -h | sort -h | less +G'
+alias miniterm.s0='miniterm.py /dev/ttyS0'
+alias miniterm.0='miniterm.py /dev/ttyUSB0'
+alias miniterm.1='miniterm.py /dev/ttyUSB1'
+alias miniterm.2='miniterm.py /dev/ttyUSB2'
+alias miniterm.3='miniterm.py /dev/ttyUSB3'
+
 
 alias weather.shanghai="wget -O - http://www.weather.com.cn/weather/101020100.shtml | html2text | less"
 alias wiki='elinks http://en.wikipedia.org/wiki/Main_Page#p-search'
@@ -32,4 +39,6 @@ export EDITOR=vi
 #export PATH=$PATH:$DIR_UTILS/android-sdk-linux/tools
 #export AP_PORT=9999
 
+
+test -f ~/.extrarc && source ~/.extrarc
 

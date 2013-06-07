@@ -26,11 +26,14 @@
   alt + Print
 
 
-"amixer -c 0 set Master toggle"
+#"amixer -c 1 set Headphone toggle"
+"volume.sh toggle"
   alt + m 
-"amixer -c 0 set Master 5%- unmute"
+#"amixer -c 1 set Headphone 5%- unmute"
+"volume.sh down"
   alt + comma
-"amixer -c 0 set Master 5%+ unmute"
+#"amixer -c 1 set Headphone 5%+ unmute"
+"volume.sh up"
   alt + period
 "gmusicbrowser -cmd PlayPause"
   alt + shift + m
