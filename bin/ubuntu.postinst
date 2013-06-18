@@ -21,6 +21,7 @@ $CMD enca convmv
 $CMD meld colordiff
 $CMD medit xournal alarm-clock-applet
 $CMD autoconf
+$CMD unison
 
 # security
 $CMD encfs cryptkeeper
