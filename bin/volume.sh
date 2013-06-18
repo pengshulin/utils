@@ -1,10 +1,9 @@
 #!/bin/sh
 
-if [ -z '$SOUND_CARD_ID' ]; then
+if [ -z "$SOUND_CARD_ID" ]; then
 SOUND_CARD_ID=0
 fi
-
-if [ -z '$SOUND_CARD_CHANNEL' ]; then
+if [ -z "$SOUND_CARD_CHANNEL" ]; then
 SOUND_CARD_CHANNEL="Master"
 fi
 
