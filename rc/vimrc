@@ -18,11 +18,11 @@ map <C-o><C-c>  <ESC>:o<CR>
 "map <C-w><C-w>  <ESC>:w<CR>
 "map <C-q><C-q>  <ESC>:q<CR>
 
-"map <C-m><C-k>  <ESC>:make<CR>
-"map <C-m><C-k><C-c>  <ESC>:make clean<CR>
-"map <C-m><C-k><C-f>  <ESC>:make flash<CR>
+map <F9>   <ESC>:make<CR>
+map <F10>  <ESC>:cp<CR>
+map <F11>  <ESC>:cn<CR>
+map <F12>  <ESC>:make flash<CR>
 
-map <C-c><C-m>  <ESC>:make<CR>
 map <C-c><C-l>  <ESC>:cl<CR>
 map <C-c><C-p>  <ESC>:cp<CR>
 map <C-c><C-n>  <ESC>:cn<CR>
