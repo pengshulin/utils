@@ -1,6 +1,0 @@
-#!/bin/bash
-# just commit as 'edit'
-
-git commit -am 'edit'
-
-

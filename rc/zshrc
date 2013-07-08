@@ -25,6 +25,10 @@ alias miniterm.1='miniterm.py /dev/ttyUSB1'
 alias miniterm.2='miniterm.py /dev/ttyUSB2'
 alias miniterm.3='miniterm.py /dev/ttyUSB3'
 
+alias git.commit.edit='git commit -am "edit"'
+alias git.status='git status'
+
+
 
 alias weather.shanghai="wget -O - http://www.weather.com.cn/weather/101020100.shtml | html2text | less"
 alias wiki='elinks http://en.wikipedia.org/wiki/Main_Page#p-search'
