@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 # execute commands repeatly
+# PengShulin <trees_peng@163.com>
 
-cmd=$@
-test -z "$cmd" && echo "usage: repeat_run commands ..." && exit 1
+REPEAT_CMD=$@
+if [ -z "$REPEAT_CMD" ]; then
+    echo "USAGE: repeat_run command-line"
+    echo "NOTE:  set REPEAT_DELAY environment for delay period in seconds"
+    exit 1
+fi
+
+if [ -z "$REPEAT_DELAY" ]; then
+    REPEAT_DELAY=0.5
+fi
 
 counter=1
 while [ 1 ]; do
-    echo -e "\e[34m[$counter]" "$cmd\e[0m"
-    $cmd
+    echo -e "\e[34m[$counter]" "$REPEAT_CMD\e[0m"
+    $REPEAT_CMD
     echo -e "\e[31mStopped.\e[0m"
     counter=$((counter+1)) 
-    sleep 0.5
+    sleep $REPEAT_DELAY
 done
 
