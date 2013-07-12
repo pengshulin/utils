@@ -1,0 +1,401 @@
+<!-- www.openhardware.net -->
+<html>
+ <head>
+  <title>Building the ARM GNU 4.3.2 toolchain, NewLib, and Insight</title>
+  <link rel="stylesheet" type="text/css" href="/.styles/commonstyles.css"/>
+<script src="/.js-global/FancyZoom.js" type="text/javascript"></script>
+<script src="/.js-global/FancyZoomHTML.js" type="text/javascript"></script>
+ </head>
+ <body onload="setupZoom()"><div class="container">
+<a name="Top"></a>
+  <h1><a href="http://www.openhardware.net" id="banner"></a></h1>
+  <div class="menudiv" style="background: #000">
+   <ul id=navigation>
+    <li><a href="http://www.openhardware.net">&nbsp;Home&nbsp;</a></li>
+    <li><a href="/Contact/">&nbsp;Contact&nbsp;</a></li>
+    <li><a href="/Embedded_ARM">&nbsp;Embedded ARM&nbsp;</a></li>
+   </ul>
+  </div>
+<!-- begin sidebar -->
+<div class="sidebar-right">
+
+  <!-- start sidebar box -->
+  <div class="box" style="text-align: left">
+   <h3 class=box-title style="text-align: left">step-by-step</h3>
+<li><a href="#downloadsource">Get the sources.</a><br>
+<li><a href="#populatedir">Build your source tree</a><br>
+<li><a href="#kickoffbuild">Compile the new toolchain</a><br>
+<li><a href="#settoolpath">Set path, etc., to new tools</a><br>
+<li><a href="#finishup">Finishing up</a><br>
+<li><a href="#insightcfg">Annoying problem w/ Insight</a><br>
+<li><a href="#insightmultiple">Multiple Insight Selections</a><br>
+<li><a href="#gcc3bug">Subtle -Os BUG w/gcc-3.x.</a><br>
+  <!-- end box -->
+  </div>
+
+</div>
+<!-- end sidebar -->
+
+<!-- terminate '' level, begin 'left' -->
+ </div>
+
+  <!-- start left box -->
+ <div class="content pad-right">
+  <div class="box">
+   <h3 class=box-title>This page will help you build a gcc development environ</h3>
+This toolchain is built from the more recent gcc-4.3.2 source.<br> 
+<br> 
+The toolchain will be suitable to use for ARM7TDMI ARM32 or Thumb code. 
+This is the toolchain I use to build the RDCF2 filesystem, NewLib stubs 
+and the application code for the LPC2000 processsors. 
+The following directions will give you an ARM7TDMI Thumb toolchain 
++ NewLib ready to use to develop applications.<br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<br> 
+<!-- terminate 'left' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>disclaimer</h3>
+While the toolchain will also produce ARM32 code, the arm-elf-gcc will 
+have to have interworking switch on (-mthumb-interwork) enabled if you 
+use the newlib.  The newlib build creates a Thumb version of the library, 
+not a pure ARM32 library.<br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="downloadsource"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Prepare to build your toolchain: collect the sources</h3>
+The packages that are being used are: gcc-4.3.2, binutils-2.19, Insight-6.8, 
+and NewLib-1.16.0.  I like to build my development environment from source 
+as I find that I not only have more control over the build process, but 
+then I don't have to worry about keeping track of where I downloaded 
+a prebuilt package.  Or that the webpage for the package has disappeared. 
+I only have to keep the scripts around to rebuild later on.<br> 
+<br> 
+These are the source files that you will need:<br> 
+<li><a href="http://ftp.gnu.org/gnu/binutils/binutils-2.19.tar.bz2">binutils-2.19.tar.bz2</a><br>
+<li><a href="http://ftp.gnu.org/gnu/gcc/gcc-4.3.2/gcc-4.3.2.tar.bz2">gcc-4.3.2.tar.bz2</a><br>
+<li><a href="ftp://sourceware.org/pub/insight/releases/insight-6.8-1.tar.bz2">insight-6.8-1</a><br>
+<li><a href="ftp://sources.redhat.com/pub/newlib/newlib-1.16.0.tar.gz">newlib-1.16.0.tar.gz</a><br>
+<li><a href="patches/Thumb/gcc-4.3.2_patch.gz">gcc-4.3.2_patch.gz</a><br>
+<li><a href="patches/Thumb/newlib_makefile_patch.gz">newlib_makefile_patch.gz</a><br>
+<br> 
+You will also need some scripts to build the toolchain:<br> 
+<li><a href="scripts/Thumb/00setSources.sh">00setSources.sh</a><br>
+<li><a href="scripts/Thumb/01makeBinUtils.sh">01makeBinUtils.sh</a><br>
+<li><a href="scripts/Thumb/02makeBootGcc.sh">02makeBootGcc.sh</a><br>
+<li><a href="scripts/Thumb/03makeNewLib.sh">03makeNewLib.sh</a><br>
+<li><a href="scripts/Thumb/04makeRealGcc.sh">04makeRealGcc.sh</a><br>
+<li><a href="scripts/Thumb/05makeInsight.sh">05makeInsight.sh</a><br>
+<li><a href="scripts/Thumb/allclean.sh">allclean.sh</a><br>
+<li><a href="scripts/Thumb/environ.sh">environ.sh</a><br>
+<br> 
+  <!-- end box -->
+  </div>
+
+<br> 
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Getting ready to build</h3>
+<b>Note: </b>All operations are done as an unpriviliged user, you do not have to be root to build this toolchain, to install, or use it.<br> 
+<b>Note: </b>Scripts will install the results under 
+<b>$HOME/DevelToolbin/binaries/armThumb-4.3.2/</b> .<br> 
+<br> 
+If this is not where you want the binaries, then edit the environ.sh script 
+and change the PREFIX.<br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="populatedir"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Create and populate the build tree</h3>
+Next is to make a directory tree to hold the sources and perform the builds: 
+<b><i>mkdir -p $HOME/ArmTools/downloads</i></b>. Put the build scripts and 
+other files you downloaded into the locations shown. Your tree 
+will now look like this:<br> 
+<plist>ArmTools/</plist><br> 
+<plist>&nbsp;|--&nbsp;00setSources.sh</plist><br> 
+<plist>&nbsp;|--&nbsp;01makeBinUtils.sh</plist><br> 
+<plist>&nbsp;|--&nbsp;02makeBootGcc.sh</plist><br> 
+<plist>&nbsp;|--&nbsp;03makeNewLib.sh</plist><br> 
+<plist>&nbsp;|--&nbsp;04makeRealGcc.sh</plist><br> 
+<plist>&nbsp;|--&nbsp;05makeInsight.sh</plist><br> 
+<plist>&nbsp;|--&nbsp;allclean.sh</plist><br> 
+<plist>&nbsp;|--&nbsp;downloads</plist><br> 
+<plist>&nbsp;|&nbsp;&nbsp;&nbsp;|-- binutils-2.19.tar.bz2</plist><br> 
+<plist>&nbsp;|&nbsp;&nbsp;&nbsp;|-- gcc-4.3.2.tar.bz2</plist><br> 
+<plist>&nbsp;|&nbsp;&nbsp;&nbsp;|-- gcc-4.3.2_patch.gz</plist><br> 
+<plist>&nbsp;|&nbsp;&nbsp;&nbsp;|-- insight-6.8.tar.bz2</plist><br> 
+<plist>&nbsp;|&nbsp;&nbsp;&nbsp;|-- newlib-1.16.0.tar.gz</plist><br> 
+<plist>&nbsp;|&nbsp;&nbsp;&nbsp;`-- newlib_makefile_patch.gz</plist><br> 
+<plist>&nbsp;`-- environ.sh</plist><br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="kickoffbuild"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Build the tools!</h3>
+Make the scripts executable: <b><i>chmod u+x ArmTools/*.sh</i></b>. 
+We will now run all scripts in numerical succession, 
+invoke them one-by-one to build each package.  The first script sets the 
+unpacks the sources into locations where the other scripts will build from.<br> 
+<br> 
+From a user login (not as root), invoke the first script as 
+<b><i>./00setSources.sh</i></b>,  and remaining scripts are also run as 
+: <b><i>./&lt;scriptname&gt;</i></b> 
+(e.g. ./00setSources.sh, ./01makeBinUtils.sh, ./02makeBootGcc.sh, etc.). 
+All scripts should complete without errors, when done, 
+the $HOME directory will have a subdir called "devtools/armThumb/".<br> 
+<br> 
+Note, if you wish to place the resulting binaries in a location other than 
+what I have chosen, edit the environ.sh script and change the PREFIX 
+location.<br> 
+<br> 
+<b><i>WARNING!: From reports from Ubuntu users, it appears that Ubuntu turns on, 
+by default, some rather stringent gcc options that will cause any code, 
+that is not absolutely perfect, to fail to build. I've added the '--disable-werror' option 
+to the configures to attempt to avoid this.  Let me know if something else is needed for 
+a successful build on Ubuntu?</b></i><br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="settoolpath"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Getting ready to use the new tools</h3>
+We are almost ready, but first you need to set a 
+path to the new gcc cross compiler, binutils and insight.  YMMV, each system 
+is slightly different, on Mandrake I now edit $HOME/.bash_profile and add 
+the new PATHs.  My path statement in the .bash_profile is: 
+<b>PATH=$PATH:$HOME/bin:$HOME/devtools/armThumb/bin</b><br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="finishup"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Finishing up</h3>
+Okay, you are done! Create an icon on your desktop to 
+point to the Insight binary at <b>$HOME/devtools/armThumb/bin/arm-elf-insight</b> 
+to have that handy. Next is to go out on the web and get a project 
+framework (project sources) to begin building your project!<br> 
+<br> 
+A note about the NewLib source and build tree, leave them under 
+<b>$HOME/devtools/armThumb/</b> (newlib_sources, newlib_build).  By leaving 
+those directories, you can do source level debugging of NewLib should it 
+become necessary. However, if you don't want the various NewLib functions 
+appearing in Insights' function list, you can safely delete those subdirs.<br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="insightcfg"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Annoying Insight problem</h3>
+One thing that drove me crazy about Insight is that it didn't seem to want 
+to save my sessions.  A session is created whenever you configure the 
+target settings, open an elf file, and connect to the target. But, Insight 
+seemed to follow some unknown method of determining just when it would 
+save that information<br> 
+<br> 
+Finally, I discovered that there are two '.gdbtkinit' files (the session 
+information). One of these are located in the user home ($HOME) directory, 
+this is the one that insight reads from when it starts.  There is a 
+second session file that is created / updated <b>each time you exit from 
+an Insight session</b>.  That second session file is in the project 
+subdirectory, the place that you did the 'File | Open' into.<br> 
+<br> 
+The session file in the user home directory is only written <b>when it does 
+not yet exist</b>. The session file within the project appears to never be 
+read from, <b>it is only written to on each exit from Insight</b>. So, run 
+Insight, go through the motions of a session: 
+'File | Target settings', 'File | Open', 'Run | Connect', 'Run | Disconnect', 
+and finally 'File | Exit'.  Copy the .gdbtkinit from the project subdirectory 
+to your home directory, overwrite any file currently there.  Now, when you 
+next run Insight, you will have the "correct" session!<br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="insightmultiple"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>Multiple Insight Project Selections</h3>
+According to the Insight docs, you can have up to five project selections 
+in the 'File' menu. You would think that Insight would behave like every 
+other program that keeps a list of recent files, or history, and do this 
+automagically? Nope, it doesn't. Sounds stupid, but Insight is brain-dead 
+when it comes to keeping a simple list of "the last 5 projects".  :-/<br> 
+<br> 
+Yes, you can have a list of recent projects, however you have to do this 
+by manually editing .gdbtkinit files yourself.  You have to modify the [gdb] 
+and [session] sections of .gdbtkinit. This is a bit tricky to do, but if 
+you follow these steps, you can easily get it done.<br> 
+<hr> 
+<li>remove the ~/.gdktkinit and those within the project directories. We 
+need to start fresh here with <b>nothing known</b> about any sessions.<br> 
+<br> 
+<li>run insight. Do nothing but setup your preferences.  I open a breakpoint, 
+console and register window, resize and locate them.  Then I set the target 
+settings under 'File | Target' and exit Insight ('File | Exit').<br> 
+<br> 
+<li>Make an archival copy of the ~/.gdbtkinit as another name to save this 
+starting point for reference (cp ~/.gdbtkinit gdbtkinit.start).<br> 
+<br> 
+<li>Make a working copy ~/.gdbtkinit as we will be using it to add the other 
+sessions to this copy (cp ~/.gdbtkinit gdbtkinit.all).<br> 
+<br> 
+<li>1. Run Insight again, the windows should now appear as you had laid 
+them out.<br> 
+<br> 
+<li>2. Open your first elf file, just do a 'File | Open', your target 
+settings need to be set again ('File | Target settings'). Go through 
+all the motions of a session, connect to the target, etc.. 
+Now, disconnect from the target ('Run | Disconnect) and exit Insight 
+('File | Exit'). This will now create a .gdbtkinit in that project 
+directory.<br> 
+<br> 
+<li>3. Copy gdbtkinit.start over the ~/.gdbtkinit in the user home directory. 
+This will revert us back to the original setup of just having a basic 
+session configured.<br> 
+<br> 
+<li>Repeat steps 1-3 as many times as needed to create .gdbtkinit sessions 
+into each of your project directories.<br> 
+<br> 
+<li>Now, verify each of these project session are complete by copying them 
+over the ~/.gdbtkinit and running Insight. You only want one project to 
+show up in the list of recent projects.  Test the session, everything should 
+connect / download as it should to the target.<br> 
+<hr> 
+That certainly was a bit of work, but we are almost there. Now we will 
+combine the necessary session data into a single file.  Starting with 
+the copy we named gdbinsight.all, edit that file and all the project 
+sessions.<br> 
+<br> 
+<li>Copy the section [session] from each of the projects into that of 
+gdbinsight.all.<br> 
+<br> 
+<li>From each project, copy into section [gdb] the line that says 
+'recent-projects='.  Once each line is copied, concatenate them into 
+a single, space separated list. e.g. 
+'recent-projects = &lt;path-name&gt; &lt;path-name&gt; ...'<br> 
+<br> 
+<li>Save the new gdbtkinit.all and copy it over ~/.gdbtkinit. When you 
+run Insight now, it will have your all your project sessions in there.<br> 
+<hr> 
+One thing I never do is to trust Insight not to mess up its .gdbtkinit file. :-( 
+Hard experience has taught me to keep a multiple project session file backed 
+up somewhere, ready to copy over a boinked ~/.gdbtkinit file.<br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<a name="gcc3bug"></a><br>
+<!-- terminate 'wide' level, begin 'wide' -->
+ </div>
+
+  <!-- start wide box -->
+ <div class="content">
+  <div class="box">
+   <h3 class=box-title><a href="#top">Top</a>What not to use!</h3>
+<b>I strongly urge anyone not to use any gcc version 3.x to build 
+Thumb code!</b><br> 
+<br> 
+ There is an optimizer bug (-Os) prior to version 4 which sometimes 
+shows up as a stack corruption during interrupts. 
+The bug is not easy to force to appear, it seems to take a number of 
+conditions within a function source to be present. 
+If an interrupt occurs while executing 
+that function, the contents of the stack will most likely be corrupted. 
+ One of the conditions which could create the bad code appears to be related 
+to instantiating a local variable inside a code block 
+and the size of the local is determined by a math calculation. 
+Something like this:<br> 
+<br> 
+<plist>void function_bad (void) {</plist><br> 
+<plist>struct ELEMENTS foobar;&nbsp;&nbsp;// struct defined locally.</plist><br> 
+<plist>...</plist><br> 
+<plist>&nbsp;for (i=0;i&lt;MAX;i++) {&nbsp;&nbsp;// do some test to get a variable count.</plist><br> 
+<plist>&nbsp;&nbsp;&nbsp;if (some_test) foobar.elements++;</plist><br> 
+<plist>&nbsp;}</plist><br> 
+<plist>&nbsp;...</plist><br> 
+<plist>&nbsp;{ // locally declare a variable length array of struct FOO.</plist><br> 
+<plist>&nbsp;&nbsp;&nbsp;struct FOO foo [4 * foobar.elements];</plist><br> 
+<plist>&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;// now we are probably in danger for stack corruption via interrupts,</plist><br> 
+<plist>&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;// if the interrupt occurs while excuting this code!</plist><br> 
+<plist>&nbsp;}</plist><br> 
+<plist>&nbsp;...&nbsp;&nbsp;// interrupt may not affect us here.</plist><br> 
+<plist>}</plist><br> 
+<br> 
+The problem is that gcc copies the value of the SP reg into R7, then allocates stack space for 
+the variables within the embedded block (e.g. struct FOO foo) by decrementing R7.  When an 
+interrupt occurs, data is written onto the stack (SP) due to the interrupt and any stack space 
+the interrupt uses will overwrite the variables that R7 has created.<br> 
+<br> 
+I have been given code that does create this situation, it is not a myth! So, do not use gcc-3.x 
+to generate ARM Thumb code! Now, this occurs when gcc-3.4.x emits Thumb code, under those conditions, 
+even though there does not appear to be evidence that this does occur when building ARM32 code, I think 
+this is reason enough not to use gcc-3.x!  The gcc versions prior to 3.4 had other issues when 
+generating ARM32 code...<br> 
+<br> 
+  <!-- end box -->
+  </div>
+
+<br> 
+<br> 
+<br> 
+<br> 
+views:<br> 
+<IMG SRC="/cgi-bin/img_counter.cgi?ThumbToolchain.txt" NAME="GraphicT" ALIGN=TOP WIDTH=40 HEIGHT=16 BORDER=0> 
+ </div>
+</body>
+</html>
+

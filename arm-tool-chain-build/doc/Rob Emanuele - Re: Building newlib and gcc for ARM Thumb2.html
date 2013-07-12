@@ -1,0 +1,173 @@
+<!-- MHonArc v2.6.3 -->
+<!--X-Subject: Re: Building newlib and gcc for ARM Thumb2 -->
+<!--X-From-R13: Dbo Sznahryr <cbbenezNfubervf.pbz> -->
+<!--X-Date: 4 Feb 2009 19:12:12 &#45;0000 -->
+<!--X-Message-Id: c8284b5b0902041112y317f13a1oba9fbb409588dc31@mail.gmail.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: c8284b5b0902011052l2b7bb8d0sdaf0b34caa796474@mail.gmail.com -->
+<!--X-Reference: 3b6faf240902030914y37abc310xcca1cf517a9c3a37@mail.gmail.com -->
+<!--X-Reference: c8284b5b0902031151k687f2fc5x4e92355e6262f023@mail.gmail.com -->
+<!--X-Reference: 4988B9FA.2000409@redhat.com -->
+<!--X-Reference: 1233740911.15475.7.camel@pc960.cambridge.arm.com -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Rob Emanuele - Re: Building newlib and gcc for ARM Thumb2</TITLE>
+</HEAD>
+<BODY>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--htdig_noindex-->
+<p>This is the mail archive of the 
+<tt>newlib@sourceware.org</tt>
+mailing list for the <a href="ftp://sourceware.org/pub/newlib/">newlib project</a>.
+
+
+<!--/htdig_noindex-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<!--htdig_noindex-->
+<HR>
+<table border="0">
+  <tr><th align="left">Index Nav:</th>
+      <td colspan="2">
+        [<A HREF="index.html#00087">Date&nbsp;Index</A>] [<a href="subjects.html#00087">Subject&nbsp;Index</a>] [<a href="authors.html#00087">Author&nbsp;Index</a>] [<A HREF="threads.html#00087">Thread&nbsp;Index</A>]
+      </td>
+  </tr>
+  <tr><th align="left">Message Nav:</th>
+      <td>[<A HREF="msg00086.html">Date&nbsp;Prev</A>]&nbsp;[<A HREF="msg00088.html">Date&nbsp;Next</A>]</td>
+      <td>[<A HREF="msg00086.html">Thread&nbsp;Prev</A>]&nbsp;[<A HREF="msg00080.html">Thread&nbsp;Next</A>]</td>
+  </tr>
+  <tr><th align="left">Other format:</th>
+  <td>[<a href="/cgi-bin/get-raw-msg?listname=newlib&date=2009&msgid=c8284b5b0902041112y317f13a1oba9fbb409588dc31%40mail.gmail.com">Raw text</a>]</td>
+  </tr>
+</table>
+<!--/htdig_noindex-->
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Building newlib and gcc for ARM Thumb2</h1>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>From</em>: Rob Emanuele &lt;poorarm at shoreis dot com&gt;</li>
+<li><em>To</em>: Richard Earnshaw &lt;rearnsha at arm dot com&gt;</li>
+<li><em>Cc</em>: Jeff Johnston &lt;jjohnstn at redhat dot com&gt;,  	Alexandre Pereira Nunes &lt;alexandre dot nunes at gmail dot com&gt;, newlib at sourceware dot org, gcc-help at gcc dot gnu dot org</li>
+<li><em>Date</em>: Wed, 4 Feb 2009 11:12:02 -0800</li>
+<li><em>Subject</em>: Re: Building newlib and gcc for ARM Thumb2</li>
+<li><em>References</em>: &lt;<a href="msg00063.html">c8284b5b0902011052l2b7bb8d0sdaf0b34caa796474@mail.gmail.com</a>&gt; 	 &lt;<a href="msg00071.html">3b6faf240902030914y37abc310xcca1cf517a9c3a37@mail.gmail.com</a>&gt; 	 &lt;<a href="msg00072.html">c8284b5b0902031151k687f2fc5x4e92355e6262f023@mail.gmail.com</a>&gt; 	 &lt;<a href="msg00073.html">4988B9FA.2000409@redhat.com</a>&gt; 	 &lt;<a href="msg00083.html">1233740911.15475.7.camel@pc960.cambridge.arm.com</a>&gt;</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>To all who helped I appreciate it.
+
+In the end patching the configs like below create the desired
+multilibs for arm, thumb, and thumb2 and gave me a deeper
+understanding of how multilibs works.  If this sort of thing is
+documented well somewhere, I'd like to know where.  Looking at the
+mainline gcc code and what the CodeSorcery folks have done was quite
+helpful.
+
+Thank you,
+
+Rob Emanuele
+
+--- proddev/vendor/gcc/current/gcc/config/arm/t-arm-elf	2009/02/03 23:22:05	2923
++++ proddev/vendor/gcc/current/gcc/config/arm/t-arm-elf	2009/02/04 18:33:29	2924
+@@ -11,15 +11,15 @@
+ MULTILIB_EXCEPTIONS  =
+ MULTILIB_MATCHES     =
+
+-#MULTILIB_OPTIONS      += march=armv7
+-#MULTILIB_DIRNAMES     += thumb2
+-#MULTILIB_EXCEPTIONS   += march=armv7* marm/*march=armv7*
+-#MULTILIB_MATCHES      += march?armv7=march?armv7-a
+-#MULTILIB_MATCHES      += march?armv7=march?armv7-r
+-#MULTILIB_MATCHES      += march?armv7=march?armv7-m
+-#MULTILIB_MATCHES      += march?armv7=mcpu?cortex-a8
+-#MULTILIB_MATCHES      += march?armv7=mcpu?cortex-r4
+-#MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m3
++MULTILIB_OPTIONS      += march=armv7
++MULTILIB_DIRNAMES     += thumb2
++MULTILIB_EXCEPTIONS   += march=armv7* marm/*march=armv7*
++MULTILIB_MATCHES      += march?armv7=march?armv7-a
++MULTILIB_MATCHES      += march?armv7=march?armv7-r
++MULTILIB_MATCHES      += march?armv7=march?armv7-m
++MULTILIB_MATCHES      += march?armv7=mcpu?cortex-a8
++MULTILIB_MATCHES      += march?armv7=mcpu?cortex-r4
++MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m3
+
+ # MULTILIB_OPTIONS    += mcpu=ep9312
+ # MULTILIB_DIRNAMES   += ep9312
+
+On Wed, Feb 4, 2009 at 1:48 AM, Richard Earnshaw &lt;rearnsha@arm.com&gt; wrote:
+&gt; On Tue, 2009-02-03 at 16:41 -0500, Jeff Johnston wrote:
+&gt;&gt; Regarding building newlib, you should know about multilibs.  Multilibs
+&gt;&gt; are versions of the library
+&gt;&gt; built with specific options.  The compiler determines what multilibs
+&gt;&gt; should exist and how to build them.
+&gt;
+&gt; Hmm, if you only want to support cortex-m3 with your toolchain, you
+&gt; might be better off configuring gcc to build only for that CPU.  Try:
+&gt;
+&gt; &lt;gcc-sources&gt;/configure --target=arm-none-eabi --with-cpu=cortex-m3 --with-mode=thumb --disable-multilib ...
+&gt;
+&gt; Your compiler will then be built specifically for cortex-m3 and your
+&gt; build of newlib should then be optimized specifically for that CPU.
+&gt;
+&gt;
+&gt; Don't try to use a toolchain built that way for any CPU other than the
+&gt; one specified; it probably wouldn't work very well.
+&gt;
+&gt; R.
+&gt;
+&gt; NB.  I haven't actually tried the above, but it should work...
+&gt;
+&gt;
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00063" href="msg00063.html">Building newlib and gcc for ARM Thumb2</a></strong>
+<ul><li><em>From:</em> Rob Emanuele</li></ul></li>
+<li><strong><a name="00071" href="msg00071.html">Re: Building newlib and gcc for ARM Thumb2</a></strong>
+<ul><li><em>From:</em> Alexandre Pereira Nunes</li></ul></li>
+<li><strong><a name="00072" href="msg00072.html">Re: Building newlib and gcc for ARM Thumb2</a></strong>
+<ul><li><em>From:</em> Rob Emanuele</li></ul></li>
+<li><strong><a name="00073" href="msg00073.html">Re: Building newlib and gcc for ARM Thumb2</a></strong>
+<ul><li><em>From:</em> Jeff Johnston</li></ul></li>
+<li><strong><a name="00083" href="msg00083.html">Re: Building newlib and gcc for ARM Thumb2</a></strong>
+<ul><li><em>From:</em> Richard Earnshaw</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<!--htdig_noindex-->
+<table border="0">
+  <tr><th align="left">Index Nav:</th>
+      <td colspan="2">
+        [<A HREF="index.html#00087">Date&nbsp;Index</A>] [<a href="subjects.html#00087">Subject&nbsp;Index</a>] [<a href="authors.html#00087">Author&nbsp;Index</a>] [<A HREF="threads.html#00087">Thread&nbsp;Index</A>]
+      </td>
+  </tr>
+  <tr><th align="left">Message Nav:</th>
+      <td>[<A HREF="msg00086.html">Date&nbsp;Prev</A>]&nbsp;[<A HREF="msg00088.html">Date&nbsp;Next</A>]</td>
+      <td>[<A HREF="msg00086.html">Thread&nbsp;Prev</A>]&nbsp;[<A HREF="msg00080.html">Thread&nbsp;Next</A>]</td>
+  </tr>
+</table>
+<!--/htdig_noindex-->
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

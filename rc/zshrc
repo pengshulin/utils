@@ -31,7 +31,7 @@ alias miniterm.7='miniterm.py /dev/ttyUSB7'
 alias miniterm.8='miniterm.py /dev/ttyUSB8'
 alias miniterm.9='miniterm.py /dev/ttyUSB9'
 
-alias st-utild='repeat_run st-util'
+alias st-utild='REPEAT_DELAY=0.2 repeat_run st-util'
 
 alias git.commit.edit='git commit -am "edit"'
 alias git.push='git push'

@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Create Cross Compile Toolchain for ARM LPC/mbed</title>
+
+<link type="image/x-icon" href="../../favicon.ico" rel="SHORTCUT ICON">
+<link rel="stylesheet" href="../style/style.css" type="text/css"/>
+</head>
+<body>
+<!-- header -->
+<div style="height:97px;margin-top:0px; background: url('../style/BG_SiteHeader_Glow.png') no-repeat scroll center top, url('../style/BG_SiteBillboardAndHeader.png') repeat-x scroll 0 0 #367B09;">
+<div style="margin-left:auto;margin-right:auto;width:980px;position:relative;">
+
+<div style="height:80px;margin-top:0px;background: url('../style/BG_SiteTopNav.png') repeat-x scroll 0 0 #F1F1F1; -moz-border-radius: 0 0 5px 5px; -webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px; border-radius: 0 0 5px 5px; -moz-box-shadow: 0 0 15px #333; -webkit-box-shadow: 0 0 15px#333; box-shadow: 0 0 15px #333; opacity:0.4; position:absolute; width:980px;">
+
+<!-- This div is not opaque because it is inside a 40pc opaque div -->
+<div style="margin-left:10px;margin-right:10px;opacity:1.0;">
+&nbsp;
+</div>
+
+</div>
+
+<!-- This div is completely opaque and where we are going to put the 
+     bengreen.eu logo -->
+<div style="position:absolute;margin-left:10px;margin-right:10px;opacity:1.0;text-align:right;width:940px;">
+<img style="float:left;" alt="bengreen.eu" src="../style/bengreeneubannerdarkgreen.png" />
+<span style="font-size:44px;color:black;"><img style="margin:5px;" alt="Circle Device" src="../style/circledevice.png" /></span>
+</div>
+
+</div>
+</div>
+<!-- /header -->
+
+<div id="page" style="width:980px;margin-left:auto;margin-right:auto;">
+ 
+<p style="line-height:27px;">&nbsp;</p>
+<div id="rightmenu">
+<h1>Techie Stuff</h1>
+
+<ul>
+<li><a href="crosscompilemybook.html">Cross Compile for MyBook World</a><br/><small>(Blue Ring Edition)</small></li>
+<li><a href="crosscompilemybookwhitelight.html">Cross Compile for MyBook World<br/></a><small>(White Light Edition)</small></li>
+<li><a href="crosscompileopenvpnformybook.html">Cross Compile OpenVPN</a></li>
+<li><a href="createcrosscompiletoolchainforlpcmbed.html">Create Toolchain for LPC/mbed</a></li>
+</ul>
+
+<h1>Projects</h1>
+
+<ul>
+<li><a href="cursestwitterintroduction.html">CursesTwitter</a></li>
+<li><a href="i2conraspberrypi.html">I2C on Raspberry Pi</a></li>
+<li><a href="serialportio.html">Serial Port I/O</a><br/>gnu.io.simplerxtx</li>
+<li><a href="nzbclient.html">NZBClient</a></li>
+</ul>
+
+<h1>Quick Reference</h1>
+<p>Will be moved to Quick Reference soon</p>
+<ul>
+<li><a href="compilingalfresco.html">Compiling Alfresco</a></li>
+<li><a href="compilingandrunninglibreplan.html">Compile and Run LibrePlan</a><br/><small>(with Jetty)</small></li>
+<li><a href="sslcertificateswithlighttpd.html">SSL and Lighttpd</a></li>
+<li><a href="gitscm.html">Quick GIT Howto</a></li>
+<li><a href="ipv6supportinfirebird.html">Firebird 2.5.2 IPv6</a></li>
+<li><a href="youtubedownloadwithfirebug.html">YouTube Video Download</a><br/><small>Without one of those other silly plugins</small></li>
+<li><a href="nerdyphotos-1.html">Nerdy Photos</a></li>
+<li><a href="blackberryh264videoencodingwithffmpeg.html">Encode for BlackBerry</a></li>
+<li><a href="montagecreationfromvideofile.html">Video File Montage Creation</a></li>
+<li><a href="compilingfmsfromsource.html">Compile FMS from Source</a></li>
+<li><a href="configuringasteriskbehindanat.html">Asterisk behind a NAT</a></li>
+<li><a href="mozillaextensions.html">Firefox Extensions</a></li>
+<li><a href="thissite.html">About this Site</a></li>
+<li><a href="creatingavideodvdwithotherfileson.html">Create a Video DVD</a><br/<small>The long way... and with files!</small></li>
+<li><a href="cookies.html">Cookie Law</a></li>
+<li><a href="latexongentoo.html">LaTeX on Gentoo</a><br/><small>With Garamond!</small></li>
+<li><a href="learningscala.html">Learning Scala</a></li>
+<li><a href="learningperl.html">Learning Perl</a></li>
+</ul>
+<!-- /menu -->
+</div>
+
+<div id="content" style="width:650px;">
+
+<!-- would look ok if you put breadcrumbs here maybe... -->
+<!-- <p style="font-size:14px;margin-bottom:5px;"><a href="">Blogs</a></p> -->
+
+<div class="entrytext">
+
+
+<h1>Create Cross Compile Toolchain for LPC/mbed</h1>
+
+<p style="color:red;"><strong>Warning:</strong> This is a work in progress</p>
+
+<p>I have an mbed LPC evaluation board and I need to be able to write raw binary files to the 
+chip... I realise that the aim of the "online compiler" is to make embedded coding easier and 
+somewhat "cooler" than it is when one has to worry about setting up their environment. I also 
+wanted to do it from scratch, I have had to do this before and it helps you learn so...</p>
+
+<p>Firstly download the source for all the required libraries and tools onto your Linux box:</p>
+
+<ul>
+<li>binutils</li>
+<li>mpfr</li>
+<li>gmp</li>
+<li>gcc</li>
+<li>newlib</li>
+</ul>
+
+<p>Our aim is to create a set of executables that are prefixed with <code>arm-none-eabi-</code>.
+we also DO NOT wish to use any sources modified from the standard 
+distribution... no CodeSourcery Lite arm-none-eabi toolchain!</p>
+
+<h1>Building</h1>
+
+<p>You should not build the various utilities in the same 
+directories as their source, I use a directory called 
+<code>&lt;blah&gt;-build</code>. Now, lets build binutils and bootstrap 
+GCC.</p>
+
+<pre>
+export PREFIX=/opt/armcortex
+cd binutils-build
+../binutils-2.22/configure --prefix=$PREFIX --target=arm-none-eabi \
+--enable-interwork --enable-multilib --disable-nls --disable-libssp
+sudo make install
+</pre>
+
+<p>In the next section we need to edit some files. I found these 
+edits on <a href="http://michaldemin.wordpress.com/2010/02/09/arm-toolchain-newlib-part1/">http://michaldemin.wordpress.com/2010/02/09/arm-toolchain-newlib-part1/</a> 
+and had a look at the same files 
+in the Mentor Graphics sources (not much help, they must have their 
+changes in a set of patches). From what I can see, all we have 
+done is enable a few things that are disabled (if I was on the 
+mailing lists I am sure I would have known this already).</p>
+
+<h2>Files we need to change before we compile GCC bootstrap</h2>
+
+<p>In <code>gcc/config/arm/t-arm-elf</code> find a section that 
+looks like this (it is probably commented out with #)</p>
+
+<pre>
+MULTILIB_OPTIONS      += march=armv7
+MULTILIB_DIRNAMES     += thumb2
+MULTILIB_EXCEPTIONS   += march=armv7* marm/*march=armv7*
+MULTILIB_MATCHES      += march?armv7=march?armv7-a
+MULTILIB_MATCHES      += march?armv7=march?armv7-r
+MULTILIB_MATCHES      += march?armv7=march?armv7-m
+MULTILIB_MATCHES      += march?armv7=mcpu?cortex-a8
+MULTILIB_MATCHES      += march?armv7=mcpu?cortex-r4
+MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m3
+</pre>
+
+<p>In <code>gcc/config/arm/elf.h</code> find the <code>#define 
+SUBTARGET_ASM_FLOAT_SPEC</code> and and change it to look like this:</p>
+
+<pre>
+#define SUBTARGET_ASM_FLOAT_SPEC "%{mapcs-float:-mfloat} \
+%{mhard-float:-mfpu=fpa} \
+%{!mhard-float:-mfpu=softfpa}"
+#endif
+</pre>
+
+<p>I found this information on <a href="http://michaldemin.wordpress.com/2010/02/09/arm-toolchain-newlib-part1/">http://michaldemin.wordpress.com/2010/02/09/arm-toolchain-newlib-part1/</a>. And continue with compilation...</p>
+
+<pre>
+<span style="color:red;">extract newlib</span>
+<span style="color:red;">edit nano gcc/config/arm/t-arm-elf</span>
+<span style="color:red;">edit nano gcc/config/arm/elf.h</span>
+cd ../gcc-build
+../gcc-4.7.0/configure --target=arm-none-eabi \
+--prefix=$PREFIX --enable-interwork --enable-multilib \
+--enable-languages="c" --with-newlib \
+--with-headers=../newlib-1.20.0/newlib/libc/include/ --disable-libssp \
+--disable-nls --with-system-zlib --with-float=soft --with-gnu-as \
+--with-gnu-ld --with-cpu=cortex-m3 --with-tune=cortex-m3 \
+--with-mode=thumb
+make all-gcc
+sudo make install-gcc
+</pre>
+
+<p>A quick check to see if we are ok. At this point we can check 
+that the compiler is able to generate the code we want it to 
+(thumb2 code). Try the below command, you should see something 
+similar.</p>
+
+<pre>
+$ arm-none-eabi-gcc --print-multi-lib
+.;
+thumb;@mthumb
+thumb/thumb2;@mthumb@march=armv7
+</pre>
+
+<p>If you don't, or maybe you see something like this:<p>
+
+<pre>
+$ arm-none-eabi-gcc --print-multi-lib
+.;
+thumb;@mthumb
+fpu;@mfloat-abi=hard
+</pre>
+
+<p>... you have missed something in the files we were modifying earlier. 
+Please have a look at <code>gcc/config/arm/t-arm-elf</code> and 
+<code>gcc/config/arm/elf.h</code> again.</p>
+
+<pre>
+cd newlib-build
+export PATH=$PATH:$PREFIX/bin
+../newlib-1.20.0/configure --target=arm-none-eabi --prefix=$PREFIX \
+--enable-interwork --enable-multilib --disable-libssp --disable-nls \
+--with-float=soft --with-gnu-as --with-gnu-ld \
+--disable-newlib-supplied-syscalls
+make CFLAGS_FOR_TARGET="-ffunction-sections \
+                        -fdata-sections \
+                        -DPREFER_SIZE_OVER_SPEED \
+                        -D__OPTIMIZE_SIZE__ \
+                        -Os \
+                        -fomit-frame-pointer \
+                        -mcpu=cortex-m3 \
+                        -mthumb \
+                        -mfix-cortex-m3-ldrd \
+                        -mfloat-abi=softfp \
+                        -D__thumb2__ \
+                        -D__BUFSIZ__=256" \
+               CCASFLAGS="-mcpu=cortex-m3 \
+                          -mthumb \
+                          -mfix-cortex-m3-ldrd \
+                          -D__thumb2__"
+sudo su
+export PATH=$PATH:/opt/armcortex/bin
+make install
+/* we have some stuff here: newlib-build/arm-none-eabi/thumb/thumb2/libgloss/arm  :-)*/
+
+/* go back and build the rest of GCC (libgcc.a) */
+cd gcc-build
+make all
+sudo make install
+
+cd gdb-build
+../gdb-7.4/configure --prefix=$PREFIX --target=arm-none-eabi
+make
+sudo make install
+</pre>
+
+<p>That is all folks, we are done creating our cross compile 
+toolchain.</p>
+
+<p>A useful thing to have is QEMU so you can simulate code you write for 
+the Cortex-M3 hardware (mbed/LPC1768 in my case). For the below I 
+cloned the </p>
+
+<pre>
+cd qemu-build
+../qemu/configure --prefix=$PREFIX --target-list=arm-softmmu
+make
+</pre>
+
+<h2>Writing a Test Programme</h2>
+
+<p><span style="color:red"><strong>Possible Problem</strong>: QEMU is 
+not working properly for me when it handles exceptions.</span> I 
+compiled the code from FreeRTOS demo for the LM3S811 and then tried 
+to execute it on the emulator, this worked fine until a task switch 
+causes QEMU to call the USAGE_FAULT interrupt handler. For more 
+details on this please see <a href="http://www.felicetufo.com/resources/freertos-arm-qemu/">Felice 
+Tufo's</a> page on the subject.</p>
+
+<p>It is important to have the right memory locations for the stack 
+and all that stuff in your linker script. At the moment QEMU cannot 
+emulate the NXP LPC17xx IC so we wil use another Cortex-M3 chip for 
+our tests, <code>lm3s6965evb</code>. This chip has the UART located 
+at <code>0x4000c000</code> and 64kB of SRAM at 
+<code>0x20000000</code>. In the linker script you will notice that I 
+have put the stack at <code>0x20008000</code> there is no special reason 
+for this location except that it is located in main memory, 
+difficult to have your stack anywhere else really ;-).</p>
+
+<pre>
+arm-none-eabi-as -mcpu=cortex-m3  -o startup_LPC17xx.o startup_LPC17xx.s
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -nostartfiles -Wl,-Map=mbed_barebones_test.map -TLPC17xx.ld startup_LPC17xx.o main.o  -o mbed_barebones_test.elf
+arm-none-eabi-objcopy -R .stack -O ihex mbed_barebones_test.elf mbed_barebones_test.hex
+arm-none-eabi-objcopy -O binary -j .text -j .data mbed_barebones_test.elf mbed_barebones_test.bin
+</pre>
+
+<p>Makefile and stuff <a href="">available here</a>, once compiled, 
+kick it off in the simulator:</p>
+
+<pre>
+qemu-system-arm -M lm3s6965evb -cpu cortex-m3 -nographic -monitor \
+null -serial stdio -kernel mbed_barebones_test.elf
+</pre>
+
+<p>You can also use the <code>.bin</code> that you could load onto the 
+IC if the UART was located at 0x4000c000 and the function to output 
+to the UART was actually written properly ;-).</p>
+
+<p>Connect to QEMU with GDB:</p>
+
+<pre>
+qemu-system-arm -M lm3s6965evb -m 128 -cpu cortex-m3 -nographic -monitor \
+null -serial stdio -kernel mbed_barebones_test.elf -gdb tcp::5022 -S
+</pre>
+
+<p>Then run <code>arm-none-eabi-gdb</code> from another terminal</p>
+
+<pre>
+(gdb) <span style="color:red;">target remote 127.0.0.1:5022</span>
+Remote debugging using 127.0.0.1:5022
+0x000000c4 in ?? ()
+(gdb) <span style="color:red;">x/10i $pc</span>
+=&gt; 0xc4:	ldr	r0, [pc, #8]	; (0xd0)
+   0xc6:	blx	r0
+   0xc8:	ldr	r0, [pc, #8]	; (0xd4)
+   0xca:	blx	r0
+   0xcc:	b.n	0xcc
+   0xce:	movs	r0, r0
+   0xd0:	lsls	r5, r1, #4
+   0xd2:	movs	r0, r0
+   0xd4:	lsls	r1, r3, #4
+   0xd6:	movs	r0, r0
+(gdb) <span style="color:red;">si</span>
+</pre>
+
+<p>Quick things I found useful when in GDB, go find a tutoial and spend some time with the ARM reference manual, I promise it will pay off :-)</p>
+
+<ul>
+<li><code>si</code> step instruction</li>
+<li><code>x/10i $pc</code> decode 10 instructions from $pc</li>
+<li><code>x/10wx $sp</code> dump 10 words (32 bit values) from $sp</li>
+<li><code>x/10hx 0x0</code> dump 10 halfwords (16 bit values) from 0x0</li>
+<li><code>x/10bx $sp</code> dump 10 bytes (8 bit values) from $sp</li>
+<li><code>set $pc = 0x50</code> set $pc to 0x50</li>
+<li><code>info reg</code> show registers</li>
+<li><code>br *0x4c</code> set breakpoint at 0x4c</li>
+<li><code>list *$pc</code> show the code (C source) of the current <code>$pc</code> address.</li>
+</ul>
+
+<h2>CMSIS</h2>
+
+<p>http://www.onarm.com/cmsis/download/</p>
+
+<h2>Interesting Pages of ARMv7M Technical Reference Manual</h2>
+
+<p>Stack and exception entering: 647. Stack Pointer manipulation 
+154.</p>
+
+<h2>Doing Stuff with Actual Hardware</h2>
+
+<p>Given the problems I had (see above) I thought I should get some hardware 
+and see if it is just a problem with QEMU. I chose an LM3S6965 (nearly 
+the hardware QEMU is emulating, which is LM3S811) and I needed some way of 
+getting my code onto the device (OpenOCD).</p>
+
+<p>More to come...</p>
+
+<p>A link to a page that was quite useful, Debian had all I needed in the 
+repo... don't worry I will be using Gentoo for my main development ;-).
+<a href="http://e2e.ti.com/support/microcontrollers/stellaris_arm_cortex-m3_microcontroller/f/471/t/65137.aspx">http://e2e.ti.com/support/microcontrollers/stellaris_arm_cortex-m3_microcontroller/f/471/t/65137.aspx</a>. 
+</p>
+
+<p><img src="images/Stellaris-LM3S6965-TH.jpg"/></p>
+
+<h2>Little Update - 2nd December 2012</h2>
+
+<p>I have been using this toolchain for actual work... you know important 
+things that <strong>MUST</strong> work on the LPC/mbed. I have noticed 
+that my linker 
+script/startup code does not honour the requirement to copy the initialised 
+data into the correct position in RAM at runtime. As you might expect this 
+does not lead to working software, I recommend that you have a look at 
+<a href="http://www.codeguru.com/cpp/cpp/cpp_mfc/general/article.php/c6967/Constant-Pointers-and-Pointers-to-Constants.htm">this page on const pointers</a> 
+and when I get chance I will update this page.</p>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://www.esden.net/blog/2009/02/26/how-to-build-arm-gnu-gcc-toolchain-for-mac-os-x/">http://www.esden.net/blog/2009/02/26/how-to-build-arm-gnu-gcc-toolchain-for-mac-os-x/</a> Building the compiler on MacOS X, it is like Linux</li>
+<li><a href="http://fun-tech.se/stm32/gcc/index.php">http://fun-tech.se/stm32/gcc/index.php</a> eLua</li>
+<li><a href="http://sourceware.org/gdb/current/onlinedocs/gdb/Machine-Code.html">GDB</a></li>
+<li><a href="http://web.cecs.pdx.edu/~jrb/cs201/lectures/handouts/gdbcomm.txt">more GDB</a></li>
+</ul>
+<!-- /content -->
+</div><!-- /div class="entrytext" -->
+
+</div><!-- /div id="content" -->
+
+<div style="line-height:27px;clear:both;"><p 
+style="text-align:center;">Quick Links: <!-- quicklinks/ --> 
+<a href="../techiestuff/homepage.html">Techie Stuff</a> | 
+<a href="../general/homepage.html">General</a> | 
+<a href="../personal/homepage.html">Personal</a> |
+<a href="../quickreference/homepage.html">Quick Reference</a></p></div>
+
+</div><!-- /div id="page" -->
+
+</body>
+</html>

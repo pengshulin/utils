@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gbk" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<title>自己build 交叉编译器 gcc 4.4.0 for ARM - 日志 - z - D家园 - Powered by UCenter Home</title>
+<script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_common.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_face.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+<style type="text/css">
+@import url(template/blue/style.css);
+</style>
+<link rel="shortcut icon" href="image/favicon.ico" />
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="xmlrpc.php?rsd=1" />
+</head>
+<body>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+
+<div id="header">
+<div class="headerwarp">
+<h1 class="logo"><a href="index.php"><img src="image/logo.gif" alt="D家园" /></a></h1>
+<ul class="menu">
+<li><a href="index.php">首页</a></li>
+
+<li><a href="network.php">随便看看</a></li>
+
+
+<li><a href="help.php">帮助</a></li>
+</ul>
+
+<div class="nav_account">
+<a href="do.php?ac=" class="login_thumb"><img src="http://dd.homeunix.com/ucenter/avatar.php?uid=0&size=small&type=real" width="20" height="20" /></a>
+欢迎您<br>
+<a href="do.php?ac=">登录</a> | 
+<a href="do.php?ac=">注册</a>
+</div>
+</div>
+</div>
+
+<div id="wrap">
+
+<div id="main">
+<div id="app_sidebar">
+<div class="bar_text">
+<form id="loginform" name="loginform" action="do.php?ac=&ref" method="post">
+<input type="hidden" name="formhash" value="3f092867" />
+<p class="title">登录站点</p>
+<p>用户名</p>
+<p><input type="text" name="username" id="username" class="t_input" size="15" value="" /></p>
+<p>密码</p>
+<p><input type="password" name="password" id="password" class="t_input" size="15" value="" /></p>
+<p><input type="checkbox" id="cookietime" name="cookietime" value="315360000" checked /><label for="cookietime">记住我</label></p>
+<p>
+<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit"  />
+<a href="do.php?ac=" class="button">注册</a>
+</p>
+</form>
+</div>
+</div>
+
+<div id="mainarea">
+
+
+
+
+<div class="c_header a_header">
+<div class="avatar48"><a href="space.php?uid=1"><img src="http://dd.homeunix.com/ucenter/avatar.php?uid=1&size=small&type=real" alt="z" /></a></div>
+<p style="font-size:14px">z的日志</p>
+<a href="space.php?uid=1" class="spacelink">z的主页</a>
+<span class="pipe">|</span> <a href="space.php?uid=1&do=blog&view=me">查看全部日志</a></div>
+<div class="tabs_header">
+<ul class="tabs">
+<li><a href="space.php?uid=1"><span>主页</span></a></li><li><a href="space.php?uid=1&do=doing&view=me"><span>记录</span></a></li><li class="active"><a href="space.php?uid=1&do=blog&view=me"><span>日志</span></a></li><li><a href="space.php?uid=1&do=album&view=me"><span>相册</span></a></li><li><a href="space.php?uid=1&do=share&view=me"><span>分享</span></a></li><li><a href="space.php?uid=1&do=thread&view=me"><span>话题</span></a></li><li><a href="space.php?uid=1&do=wall&view=me"><span>留言</span></a></li></ul>
+</div>
+
+
+<div class="h_status">
+查看日志<span class="pipe">|</span><a href="space.php?uid=1&do=blog&view=me">返回日志列表</a>
+</div>
+
+<div>
+<div class="entry">
+<div class="title">
+<h1>自己build 交叉编译器 gcc 4.4.0 for ARM</h1>
+<a href="space.php?uid=1&do=tag">标签</a>:&nbsp;
+<a href="space.php?uid=1&do=tag&id=7">gcc</a>&nbsp;
+<a href="space.php?uid=1&do=tag&id=8">ARM</a>&nbsp;
+<a href="space.php?uid=1&do=tag&id=12">build</a>&nbsp;
+<a href="space.php?uid=1&do=tag&id=9">编译</a>&nbsp;
+<a href="space.php?uid=1&do=tag&id=13">交叉</a>&nbsp;
+<span class="time">2009-06-30 21:35</span>
+</div>
+
+<div id="blog_article" class="article">
+<div class="resizeimg">最近在FreeBSD上折腾,发现FreeBSD.org提供的arm-elf-gcc包居然是2.95.3,实在有够老的了,还是自己动手,build新版的toolchain吧. 随着Cortec-M3核使用增长,是时候转移到arm-eabi上了, 本例用于无RTOS环境,所以设置为 arm-none-eabi. 如果使用RTEMS, 倒是有现成的arm-rtems-gcc-4.3.2_1.<br><br>在开始之前首先要说明,FreeBSD系统与linux不同,他的make不是gnu make,而gcc的Makefile有些特性是需要gnu make支持的,所以需要预先安装 gnu make.&nbsp; 修改本例的build脚本参数:<br>export MAKE=gmake <br>为<br>export MAKE=make<br>则可以在linux环境下build. 本例在debian下测试通过.<br><br><br>其他需要预先安装的有:<br>bison (本例 2.4.1) <br>flex (本例 2.5.4)<br>sed (本例 4.1.5)<br>termcap (本例 1.3)<br>gmp 4.1+ (本例 4.3.1)<br>mpfr 2.3.2+ (本例 2.4.1)<br><br>Toolchain需要下载的源代码有: <br><a href="http://dd.homeunix.com/home/attachment/public-File/binutils-2.19.1.tar.bz2">binutils 2.19.1</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/gcc-4.4.0-src.tar.bz2">gcc 4.4.0</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/newlib-1.17.0.tar.gz">newlib 1.17.0</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/gdb-6.8.tar.bz2">gdb 6.8</a><br><br>本例脚本文件:<br>
+<a href="attachment/public-File/envset.sh">envset.sh</a> 主要的参数设定都在这个文件里<br><a href="http://dd.homeunix.com/home/attachment/public-File/01mkbinutils.sh">01mkbinutils.sh</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/02mkbootgcc.sh">02mkbootgcc.sh</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/03mklib.sh">03mklib.sh</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/04mkgcc.sh">04mkgcc.sh</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/05mkgdb.sh">05mkgdb.sh</a><br><a href="http://dd.homeunix.com/home/attachment/public-File/clean.sh">clean.sh</a> 清除所有的*-build目录<br><br>上述源代码和scripts在我的日志(http://dd.homeunix.com/home/space.php?uid=1&amp;do=blog&amp;id=4)中提供下载.<br><br>过程详述:<br>1. 编译 binutils<br>&nbsp;&nbsp; 编译ld,ar,readelf ... 等 utility<br>2. 编译 gcc bootstrap<br>&nbsp;&nbsp; 编译精简版gcc,用于后续步骤<br>3. 编译 newlib<br>&nbsp;&nbsp; 一般而言arm7,M3使用开销较少的newlib比较适合，而在arm9，avr32上跑linux的话，就应该用glibc<br>4. 编译 full gcc<br>&nbsp;&nbsp; c之外的语言，如c++会在这一步编译<br>5. 编译gdb<br>&nbsp;&nbsp; 值得一提的是gdb带有模拟器，可以脱离目标机做一些逻辑验证,如本例最后的示范程序<br><br>参数详解:<br>#设定目标机，如果目标机为avr32，powerpc等， 改这里<br>export TARGET=arm-none-eabi <br><br>export TARGET_DIR="$HOME/usr/local/$TARGET"<br>export LIB_SRC="$HOME/usr/local/newlib-1.17.0"<br><br>#MY_CONFIG 会被用来设定binutils newlib gdb <br>export
+MY_CONFIG="-v --quiet --target=$TARGET --prefix=$TARGET_DIR
+--enable-interwork --enable-multilib --with-gnu-ld --with-gnu-as
+--disable-nls --disable-werror<br><br>#设定gcc bootstrap<br>export
+BOOTGCC_CONFIG="-v --quiet --target=$TARGET --prefix=$TARGET_DIR
+--with-gnu-ld --with-gnu-as --disable-shared --disable-nls
+--disable-werror"<br><br>#配合BOOTGCC_CONFIG, 设定完整版gcc<br>export
+GCC_CONFIG="--enable-languages=c
+--with-headers=$LIB_SRC/newlib/libc/include --with-newlib
+--enable-interwork --enable-multilib --with-dwarf2"<br><br>#占位，可以用来添加libc编译选项<br>export LIB_CONFIG="" <br>#特别啰嗦一下 --disable-newlib-supplied-syscalls 这个选项, 使用它则意味着用户必须提供一些底层函数,如:_read_r _open_r, 如果你和它们不熟,那就别碰它,否则用户项目链接的时候就会报告错误. <br><br>export PATH="$TARGET_DIR/bin:$PATH"<br><br>#FreeBSD should set to gmake(gnu make) rather than make <br>#linux改为make就可以了<br>export MAKE=gmake<br><br>假定工作目录为: ~/gcc, toolchain被安装到 $HOME/usr/local/<br><br>解压缩:<br>$cd ~/gcc<br>$ls<br>01mkbinutils.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 03mklib.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 05mkgdb.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; envset.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gdb-6.8.tar.bz2<br>02mkbootgcc.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 04mkgcc.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; binutils-2.19.1.tar.bz2 gcc-4.4.0-src.tar.bz2&nbsp;&nbsp; newlib-1.17.0.tar.gz<br>$chmod u+x *.sh<br>$tar jxf binutils-2.19.1.tar.bz2<br>$tar jxf gcc-4.4.0-src.tar.bz2<br>$tar jxf gdb-6.8.tar.bz2<br>$mkdir lib-build<br>$mkdir binutils-build<br>$mkdir gcc-build<br>$mkdir gdb-build<br>$cd ~/usr/local<br>$tar zxf ~/gcc/newlib-1.17.0.tar.gz<br>本例将newlib解压在~/usr/local而不是toolchain目录中,这样的好处是不仅在调试中可以进入C库源代码，<br>而且多个toolchain，尤其是类似gcc for powerpc, avr32可以共享C库源代码。<br><br><br>
+BUILD过程既顺序执行上述脚本<br>
+$cd ~/gcc<br>
+$./01mkbinutils.sh &amp;&amp; ./02mkbootgcc.sh &amp;&amp; ./03mklib.sh&nbsp; &amp;&amp; ./04mkgcc.sh &amp;&amp; ./05mkgdb.sh<br>想想光是gcc源代码就在400M左右,
+这个build过程会是很漫长的，你已经在机器前一段时间了，出去踢会儿球吧。<br><br>如果一切顺利，按照确省值,build出的toolchain是带有调试信息的，可以用strip去掉调试信息。<br><br>编译完成后，记得要把$(TARGET_DIR)目录,在本例是$HOME/usr/local/arm-none-eabi/bin加入到PATH中.<br><br>检验成果，打印Fibonacci数列前20位：<br>$ cat a.c<br>#include &lt;stdio.h&gt;<br><br>int main()<br>{<br>&nbsp;&nbsp; int i, j,t,c=1;<br>&nbsp;&nbsp; for(i=j=1;c&lt;=20;c++){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("%d: %d\n",c,i);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; t=j;j=i+j;i=t;<br>&nbsp;&nbsp; }<br>&nbsp;&nbsp; return 0;<br>}<br><br>$ arm-none-eabi-gcc a.c -o a.elf<br>$ arm-none-eabi-readelf -e a.elf<br>ELF Header:<br>&nbsp; Magic:&nbsp;&nbsp; 7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00<br>&nbsp; Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ELF32<br>&nbsp; Data:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2's complement, little endian<br>&nbsp; Version:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 (current)<br>&nbsp; OS/ABI:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UNIX - System V<br>&nbsp; ABI Version:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0<br>&nbsp; Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EXEC (Executable file)<br>&nbsp; Machine:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ARM<br>&nbsp; Version:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x1<br>&nbsp; Entry point address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x80ac<br>&nbsp; Start of program headers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 52 (bytes into file)<br>&nbsp; Start of section headers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 195408 (bytes into file)<br>&nbsp; Flags:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x5000002, has entry point, Version5 EABI<br>&nbsp; Size of this header:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 52 (bytes)<br>&nbsp; Size of program headers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 32 (bytes)<br>&nbsp; Number of program headers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3<br>&nbsp; Size of section headers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 40 (bytes)<br>&nbsp; Number of section headers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 25<br>&nbsp; Section header string table index: 22<br><br>Section Headers:<br>&nbsp; [Nr] Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Addr&nbsp;&nbsp;&nbsp;&nbsp; Off&nbsp;&nbsp;&nbsp; Size&nbsp;&nbsp; ES Flg Lk Inf Al<br>&nbsp; [ 0]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NULL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 000000 000000 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 0<br>&nbsp; [ 1] .init&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00008000 008000 000018 00&nbsp; AX&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 2] .text&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00008018 008018 004708 00&nbsp; AX&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 3] .fini&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0000c720 00c720 000018 00&nbsp; AX&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 4] .rodata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0000c738 00c738 000064 00&nbsp;&nbsp; A&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 5] .ARM.exidx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ARM_EXIDX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0000c79c 00c79c 000008 00&nbsp; AL&nbsp; 2&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 6] .eh_frame&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0000c7a4 00c7a4 000a94 00&nbsp;&nbsp; A&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 7] .init_array&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INIT_ARRAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00015238 00d238 000004 00&nbsp; WA&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 8] .fini_array&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FINI_ARRAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0001523c 00d23c 000004 00&nbsp; WA&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [ 9] .jcr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00015240 00d240 000004 00&nbsp; WA&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [10] .data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00015248 00d248 000958 00&nbsp; WA&nbsp; 0&nbsp;&nbsp; 0&nbsp; 8<br>&nbsp; [11] .bss&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NOBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00015ba0 00dba0 000104 00&nbsp; WA&nbsp; 0&nbsp;&nbsp; 0&nbsp; 4<br>&nbsp; [12] .comment&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 00dba0 0002be 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [13] .debug_aranges&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 00de60 0004b0 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 8<br>&nbsp; [14] .debug_pubnames&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 00e310 000816 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [15] .debug_info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 00eb26 0145a3 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [16] .debug_abbrev&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 0230c9 003974 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [17] .debug_line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 026a3d 003b0c 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [18] .debug_str&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 02a549 0016dd 01&nbsp; MS&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [19] .debug_loc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 02bc26 003a93 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [20] .debug_ranges&nbsp;&nbsp;&nbsp;&nbsp; PROGBITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 02f6c0 000370 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 8<br>&nbsp; [21] .ARM.attributes&nbsp;&nbsp; ARM_ATTRIBUTES&nbsp; 00000000 02fa30 00002c 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [22] .shstrtab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STRTAB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 02fa5c 0000f4 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>&nbsp; [23] .symtab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SYMTAB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 02ff38 001590 10&nbsp;&nbsp;&nbsp;&nbsp; 24 229&nbsp; 4<br>&nbsp; [24] .strtab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STRTAB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00000000 0314c8 000857 00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 0&nbsp; 1<br>Key to Flags:<br>&nbsp; W (write), A (alloc), X (execute), M (merge), S (strings)<br>&nbsp; I (info), L (link order), G (group), x (unknown)<br>&nbsp; O (extra OS processing required) o (OS specific), p (processor specific)<br><br>Program Headers:<br>&nbsp; Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Offset&nbsp;&nbsp; VirtAddr&nbsp;&nbsp; PhysAddr&nbsp;&nbsp; FileSiz MemSiz&nbsp; Flg Align<br>&nbsp; EXIDX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x00c79c 0x0000c79c 0x0000c79c 0x00008 0x00008 R&nbsp;&nbsp; 0x4<br>&nbsp; LOAD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x008000 0x00008000 0x00008000 0x05238 0x05238 R E 0x8000<br>&nbsp; LOAD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x00d238 0x00015238 0x00015238 0x00968 0x00a6c RW&nbsp; 0x8000<br><br>&nbsp;Section to Segment mapping:<br>&nbsp; Segment Sections...<br>&nbsp;&nbsp; 00&nbsp;&nbsp;&nbsp;&nbsp; .ARM.exidx<br>&nbsp;&nbsp; 01&nbsp;&nbsp;&nbsp;&nbsp; .init .text .fini .rodata .ARM.exidx .eh_frame<br>&nbsp;&nbsp; 02&nbsp;&nbsp;&nbsp;&nbsp; .init_array .fini_array .jcr .data .bss<br>$ arm-none-eabi-run a.elf<br>1: 1<br>2: 1<br>3: 2<br>4: 3<br>5: 5<br>6: 8<br>7: 13<br>8: 21<br>9: 34<br>10: 55<br>11: 89<br>12: 144<br>13: 233<br>14: 377<br>15: 610<br>16: 987<br>17: 1597<br>18: 2584<br>19: 4181<br>20: 6765<br>$<br><br>本例在FreeBSD 和debian下测试通过.<br><br>等有空时会再试一下powerpc和avr32.上述脚本做少许改动,可以支持avr芯片for FreeBSD and windows,稍后我会另出一篇介绍.<br><br>[09-JUL-17]<br>上述脚本只需将target改为powerpc-none-eabi,即可成功build。<br>AVR32 也成功build了，不过过程相对复杂些。这个MCU不大流行,这里就不多说了.<br>AVR 成功build了,详见:<br><a href="http://dd.homeunix.com/home/space.php?uid=1&amp;do=blog&amp;id=6">http://dd.homeunix.com/home/space.php?uid=1&amp;do=blog&amp;id=6</a><br>该文提供了适用于linux和windows的脚本。<br><br>Reference:<br>http://www.openhardware.net/Embedded_ARM/Toolchain/<br>&nbsp; 这里介绍了如何build arm-elf-gcc 4.3.2．<br>http://www.devkitpro.org/<br>&nbsp; 这里更涉及到更多种类CPU支持.<br></div>
+</div>
+
+<div class="status">
+<a href="cp.php?ac=share&type=blog&id=4" id="a_share" onclick="ajaxmenu(event, this.id, 99999,'' , -1)" class="a_share">分享</a>
+<div class="r_option">
+<a href="cp.php?ac=common&op=report&idtype=blog&id=4" id="a_report" onclick="ajaxmenu(event, this.id, 99999,'' , -1)">举报</a><span class="pipe">|</span>
+</div>
+
+2267 次阅读 | <span id="comment_replynum">0</span> 个评论
+</div>
+</div>
+
+<div class="trace" style="padding-bottom: 10px;">
+<div class="title">
+<h2>留下脚印</h2>
+</div>
+<div id="trace_div">
+<ul class="avatar_list" id="trace_ul">
+<li><a href="cp.php?ac=blog&blogid=4&op=trace" id="trace_4" onclick="ajaxmenu(event, this.id, 2000, 'show_trace')" class="tracebutton">踩一脚</a></li>
+<li style="padding-left: 8px; width: auto; line-height: 28px;" class="gray">您的头像会显示在这里</li>
+</ul>
+</div>
+</div>
+<div class="comments" id="div_main_content">
+
+<h2>评论</h2>
+
+<div class="comments_list" id="comment">
+<ul id="comment_ul">
+</ul>
+</div>
+<div class="page"></div>
+
+<form id="quickcommentform_4" name="quickcommentform_4" action="cp.php?ac=comment" method="post" class="quickpost">
+
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<a href="###" id="face" title="插入表情" onclick="showFace(this.id, 'comment_message');"><img src="image/facelist.gif" align="absmiddle" /></a><br>
+<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;"></textarea>
+</td>
+</tr>
+<tr>
+<td>
+<input type="hidden" name="refer" value="space.php?uid=1&do=blog&id=4" />
+<input type="hidden" name="id" value="4">
+<input type="hidden" name="idtype" value="blogid">
+<input type="hidden" name="commentsubmit" value="true" />
+<input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform_4', 'comment_status', 'comment_add')" />
+<span id="comment_status"></span>
+</td>
+</tr>
+</table>
+<input type="hidden" name="formhash" value="3f092867" /></form>
+<br />
+</div>
+
+</div>
+
+
+<script type="text/javascript">
+<!--
+function closeSide2(oo) {
+if($('sidebar').style.display == 'none'){
+$('content').style.cssText = '';
+$('sidebar').style.display = 'block';
+oo.innerHTML = '&raquo; 关闭侧边栏';
+}
+else{
+$('content').style.cssText = 'margin: 0pt; width: 810px;';
+$('sidebar').style.display = 'none';		
+oo.innerHTML = '&laquo; 打开侧边栏';
+}
+}
+function show_trace(id) {
+ajaxget('do.php?ac=ajax&op=trace&blogid='+4, 'trace_ul');
+return false;
+}
+function show_trace_all() {
+ajaxget('do.php?ac=ajax&op=traceall&blogid='+4+'&ajaxdiv=trace_div', 'trace_div');
+return false;
+}
+resizeImg('blog_article','500');
+resizeImg('div_main_content','450');
+-->
+</script>
+
+</div>
+
+<!--/mainarea-->
+<div id="bottom"></div>
+</div>
+<!--/main-->
+
+<div id="footer" title="">
+
+<p class="r_option">
+<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+</p>
+
+
+<p>
+D家园 - 
+<a href="mailto:yystype@yahoo.ca">联系我们</a>
+</p>
+<p>
+Powered by <a  href="http://u.discuz.net" target="_blank"><strong>UCenter Home</strong></a> <span title="20090114">1.5</span>
+&copy; 2001-2009 <a  href="http://www.comsenz.com" target="_blank">Comsenz Inc.</a>
+</p>
+</div>
+</div>
+<!--/wrap-->
+
+
+
+
+</body>
+</html>
