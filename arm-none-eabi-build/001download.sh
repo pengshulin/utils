@@ -17,7 +17,6 @@ FILE=gdb-$VER_GDB.tar.bz2
 test -f $FILE || ( wget ftp://ftp.gnu.org/gnu/gdb/$FILE && tar jxf $FILE )
 
 FILE=newlib-$VER_NEWLIB.tar.gz
-test -f $FILE || wget ftp://sourceware.org/pub/newlib/$FILE
-test -f $FILE && echo "TODO: gunzip newlib manually"
+test -f $FILE || ( wget ftp://sourceware.org/pub/newlib/$FILE && tar zxf $FILE )
 
 

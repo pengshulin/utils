@@ -1,7 +1,10 @@
-export VER_BINUTILS=2.19.1
-export VER_NEWLIB=1.17.0
+#export VER_BINUTILS=2.19.1
+export VER_BINUTILS=2.22
+#export VER_NEWLIB=1.17.0
+export VER_NEWLIB=1.18.0
 #export VER_NEWLIB=2.0.0
 export VER_GCC=4.4.0
+#export VER_GCC=4.6.3
 #export VER_GDB=6.8
 export VER_GDB=7.6
 

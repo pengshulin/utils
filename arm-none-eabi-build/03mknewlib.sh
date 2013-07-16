@@ -1,7 +1,7 @@
 #!/bin/sh
 . ./envset.sh
 
-mkdir -p newlib-build
-cd newlib-build
+mkdir -p newlib-$VER_NEWLIB-build
+cd newlib-$VER_NEWLIB-build
 $NEWLIB_SRC/configure $NEWLIB_CONFIG
 $MAKE all install
