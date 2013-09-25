@@ -4,7 +4,7 @@ syntax on
 set guifont=inconsolata\ 14
 set mouse=a
 set number
-autocmd FileType python compiler pylint
+"autocmd FileType python compiler pylint
 
 set et
 set ts=4
@@ -12,11 +12,13 @@ set sw=4
 
 map <C-o><C-d>  <ESC>:o .<CR>
 map <C-o><C-c>  <ESC>:o<CR>
+map <F5>   <ESC>:o<CR>
 "map <C-v>  <ESC><C-d><C-d>kkk
 "map <C-c><C-l>  <ESC>:%s/\s\+$//g<CR>
 
 "map <C-w><C-w>  <ESC>:w<CR>
 "map <C-q><C-q>  <ESC>:q<CR>
+
 
 map <F9>   <ESC>:make<CR>
 map <F10>  <ESC>:cp<CR>
