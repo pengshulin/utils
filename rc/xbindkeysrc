@@ -18,6 +18,8 @@
   control + alt + h 
 "xfce4-terminal -x ipython"
   control + alt + p
+"xfce4-terminal -x octave"
+  control + alt + o 
 "xfce4-screenshooter -f"
   Print
 "xfce4-screenshooter -r"
