@@ -54,6 +54,7 @@ $CMD python-pip
 $CMD python-examples wx2.8-examples
 $CMD python-pygraphviz python-pygraph python-gvgen python-fontforge
 $CMD python-pyinotify python-inotifyx
+$CMD python-ldtp
 $CMD ipython
 $CMD eric 
 # lua
