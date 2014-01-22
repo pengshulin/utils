@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+ports=`find /dev -type c -name "ttyUSB*"`
+   
+if [ -z "$ports" ]; then
+    echo 'No /dev/ttyUSB* device found'
+    exit
+fi
+
+kill_sub_progs()
+{
+    echo 'kill subprogs'
+    subprogs=`ps --ppid $$ -o pid --no-headers | xargs`
+    if [ -n "$subprogs" ]; then
+        #echo "kill -9 $subprogs"
+        kill -9 $subprogs >/dev/null  2>/dev/null
+    fi 
+}
+
+for p in ${ports}; do
+    if [ "$PORT_EXCEPT" != "$p" ]; then
+        echo -e "\e[34mPORT=$p $@\e[0m"
+        PORT=$p $@ &
+    fi
+done
+
+trap kill_sub_progs INT
+
+wait
+echo -e "\e[34mDONE\e[0m"
+
