@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+if [ -z "$PORTS" ]; then
 ports=`find /dev -type c -name "ttyUSB*"`
-   
+else
+ports=`echo $PORTS | sed s/,/\\\n/g`
+fi
+
 if [ -z "$ports" ]; then
     echo 'No /dev/ttyUSB* device found'
     exit
