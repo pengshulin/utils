@@ -1,10 +1,10 @@
 #!/bin/sh
 
-CMD="pkg_add -v"
+CMD="pkg_add"
 
 $CMD vim git bash zsh exctags
 $CMD tmux openssh openssl
-$CMD enca hexedit tree
+$CMD enca hexedit tree htop
 $CMD automake autoconf
 $CMD arp-scan
 
