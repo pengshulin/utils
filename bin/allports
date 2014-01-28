@@ -17,7 +17,7 @@ if [ -z "$ports_filtered" ]; then
     exit
 fi
 
-if [ -z "$@" ]; then
+if [ $# -eq 0 ]; then
     echo $ports_filtered | sed s/\ /,/g
     exit
 fi
