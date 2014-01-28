@@ -1,0 +1,34 @@
+#!/bin/sh
+
+CMD="pkg_add -v"
+
+$CMD vim git bash zsh exctags
+$CMD tmux openssh openssl
+$CMD enca hexedit
+$CMD automake autoconf
+$CMD arp-scan
+
+
+$CMD python2.7
+$CMD py27-ipython
+$CMD py27-pip py27-pyserial
+$CMD py27-sqlite3 py27-matplotlib py27-imaging
+$CMD py27-numpy py27-scipy py27-gtk2 py27-wxWidgets py27-game
+$CMD py27-beautifulsoup
+
+$CMD guile clisp
+
+$CMD xfce4
+$CMD ibus ibus-pinyin
+
+$CMD inconsolata-ttf freefont-ttf freefonts 
+$CMD inkscape gimp gthumb
+$CMD firefox
+
+$CMD librecad
+
+
+
+
+
+
