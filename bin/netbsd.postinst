@@ -15,7 +15,7 @@ $CMD py27-sqlite3 py27-matplotlib py27-imaging
 $CMD py27-numpy py27-scipy py27-gtk2 py27-wxWidgets py27-game
 $CMD py27-beautifulsoup
 
-$CMD guile clisp minischeme tinyscheme mit-scheme scheme48
+$CMD guile clisp minischeme tinyscheme mit-scheme-bin scheme48
 
 $CMD xfce4
 $CMD ibus ibus-pinyin
