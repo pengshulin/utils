@@ -1,10 +1,10 @@
 #!/bin/sh
-# read ascii file and convert CF/LF to LF at the end of each line
+# read ascii file and convert LF to CF/LF at the end of each line
 # Peng Shulin <trees_peng@163.com>
 
 case "$#" in
 1)	TMPFILE=`mktemp`;
-    sed -e 's/.$//' $1 > $TMPFILE; 
+    sed -e "s/$/`echo \\\r`/" $1 > $TMPFILE; 
 	mv $TMPFILE $1;;
 *)	echo "Usage:  `basename $0` file"
 	exit;;
