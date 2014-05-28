@@ -1,0 +1,20 @@
+(menu-bar-mode)
+(global-linum-mode 1)
+(setq linum-format "%d ")
+(setq default-tab-width 4)
+(setq-default indent-tabs-mode nil)
+
+(defun make ()
+  "call make"
+  (interactive)
+  (compile "make" nil))
+
+(global-set-key (kbd "<f9>") 'make)
+
+(defun make-flash ()
+  "call make flash"
+  (interactive)
+  (compile "make flash" nil))
+
+(global-set-key (kbd "<f12>") 'make-flash)
+
