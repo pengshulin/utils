@@ -37,6 +37,8 @@ $CMD pdfmod pdfshuffler rednotebook
 $CMD markdown python-markdown retext pandoc 
 $CMD antiword
 $CMD samba system-config-samba
+$CMD qrfcview
+$CMD dos2unix
 
 # media
 $CMD vlc smplayer
