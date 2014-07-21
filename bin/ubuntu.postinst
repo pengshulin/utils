@@ -2,116 +2,121 @@
 # packages needed after ubuntu-live-cd installation
 # Peng Shulin <trees_peng@163.com>
 
-CMD='sudo apt-get -q -y -m install'
+INSTALL='sudo apt-get -q -y -m install'
+AUTOREMOVE='sudo apt-get autoremove'
 
 # 64-bit system only
 if [[ `uname -m` == 'x86_64' ]];
-then $CMD ia32-libs ;
+then $INSTALL ia32-libs ;
 fi
 
 # system tools
-$CMD vim vim-gtk emacs emacs23-nox emacs23-el rlwrap vbindiff
-$CMD htop tree ctags astyle sloccount hexedit ghex ascii zsh socat xbindkeys
-$CMD screen tmux
-$CMD ssh sshd
-$CMD git gitk subversion cvs scons
-$CMD dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
-$CMD gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors filelight
-$CMD enca convmv
-$CMD meld colordiff
-$CMD medit xournal alarm-clock-applet
-$CMD autoconf
-$CMD unison unison-gtk
-$CMD synaptic
+$INSTALL vim vim-gtk emacs emacs23-nox emacs23-el rlwrap vbindiff
+$INSTALL htop tree ctags astyle sloccount hexedit ghex ascii zsh socat xbindkeys
+$INSTALL screen tmux
+$INSTALL ssh sshd gstm
+$INSTALL git gitk subversion cvs scons
+$INSTALL dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
+$INSTALL gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors filelight
+$INSTALL enca convmv
+$INSTALL meld colordiff
+$INSTALL medit xournal alarm-clock-applet
+$INSTALL autoconf
+$INSTALL unison unison-gtk
+$INSTALL synaptic
 
 # security
-$CMD encfs cryptkeeper
+$INSTALL encfs cryptkeeper
 
 # office/image
-$CMD gimp inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
-$CMD gpick agave
-$CMD scrot
-$CMD imagemagick graphviz
-$CMD ttf-inconsolata ttf-unifont
-$CMD ttf-wqy-microhei ttf-wyq-zenhei
-$CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
-$CMD pdfmod pdfshuffler rednotebook
-$CMD markdown python-markdown retext pandoc 
-$CMD antiword
-$CMD samba system-config-samba
-$CMD qrfcview
-$CMD dos2unix
+$INSTALL gimp inkscape dia fontforge cups-pdf otf2bdf doxygen scribus
+$INSTALL gpick agave
+$INSTALL scrot
+$INSTALL imagemagick graphviz
+$INSTALL fonts-inconsolata ttf-unifont
+$INSTALL ttf-wqy-microhei ttf-wyq-zenhei
+$INSTALL freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
+$INSTALL pdfmod pdfshuffler rednotebook
+$INSTALL markdown python-markdown retext pandoc 
+$INSTALL antiword
+$INSTALL samba system-config-samba
+$INSTALL dos2unix
+$INSTALL blender librecad
 
 # media
-$CMD vlc smplayer
+$INSTALL vlc smplayer audacity
 
 # programming languages
 # c
-$CMD cflow python-pycallgraph swig
-$CMD splint
+$INSTALL cflow python-pycallgraph swig
+$INSTALL splint
 # python
-$CMD idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
-$CMD python-matplotlib python-wxglade python-pygame python-beautifulsoup
-$CMD python-ctypes python-cheetah python-markdown python-memcache python-svn
-$CMD python-setuptools python-unit python-unittest2 python-testtools
-$CMD python-pip 
-$CMD python-examples wx2.8-examples
-$CMD python-pygraphviz python-pygraph python-gvgen python-fontforge
-$CMD python-pyinotify python-inotifyx
-$CMD python-ldtp
-$CMD ipython
-$CMD eric 
+$INSTALL idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
+$INSTALL python-matplotlib python-wxglade python-pygame python-beautifulsoup
+$INSTALL python-ctypes python-cheetah python-markdown python-memcache python-svn
+$INSTALL python-setuptools python-unit python-unittest2 python-testtools
+$INSTALL python-pip 
+$INSTALL python-examples wx2.8-examples
+$INSTALL python-pygraphviz python-pygraph python-gvgen python-fontforge
+$INSTALL python-pyinotify python-inotifyx
+$INSTALL python-ldtp
+$INSTALL ipython
+$INSTALL eric 
 # lua
-$CMD lua5.1 
+$INSTALL lua5.1 
 # ruby
-$CMD ruby rubygems 
+$INSTALL ruby rubygems 
 # lisp
-$CMD clisp clisp-doc sbcl sbcl-doc 
-$CMD slime
-$CMD guile-1.8 guile-1.8-doc guile-1.8-dev
-$CMD mit-scheme:i386 mit-scheme-doc 
-$CMD scheme2c scheme48 scheme9 tinyscheme scm slib 
-$CMD racket racket-doc
+$INSTALL clisp clisp-doc sbcl sbcl-doc 
+$INSTALL slime
+$INSTALL guile-1.8 guile-1.8-doc guile-1.8-dev
+$INSTALL mit-scheme:i386 mit-scheme-doc 
+$INSTALL scheme2c scheme48 scheme9 tinyscheme scm slib 
+$INSTALL racket racket-doc
 
 # libraries
 # libreadline5:i386 is used by jlink
-$CMD libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5:i386
-$CMD ncurses-dev
+$INSTALL libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5:i386
+$INSTALL ncurses-dev
 
 # embedded system dev.
-$CMD arduino
-$CMD openocd sdcc usbprog usbprog-gui
-$CMD gcc-msp430 mspdebug
-$CMD gdb-msp430
-$CMD gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
+$INSTALL arduino
+$INSTALL openocd sdcc usbprog usbprog-gui
+$INSTALL gcc-msp430 mspdebug
+$INSTALL gdb-msp430
+$INSTALL gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
 
 # electronics
-$CMD pcb gerbv geda kicad qucs
+$INSTALL pcb gerbv geda kicad qucs
 
 # scientific
-$CMD octave3.2 gnuplot-nox gnuplot-x11
-$CMD veusz
+$INSTALL octave3.2 gnuplot-nox gnuplot-x11
+$INSTALL veusz
 
 # copy vsftpd configuration files to /etc/vsftpd.*
-$CMD vsftpd
-#$CMD wine 
-#$CMD openfetion
-$CMD php5 apache2
-$CMD sqliteman sqlitebrowser
+$INSTALL vsftpd
+#$INSTALL wine 
+#$INSTALL openfetion
+$INSTALL php5 apache2
+$INSTALL sqliteman sqlitebrowser
 
 # documents
-$CMD bash-doc zsh-doc 
-$CMD binutils-doc gcc-doc gdb-doc vim-doc make-doc scons-doc
-$CMD glibc-doc wx2.8-doc splint-doc-html imagemagick-doc graphviz-doc
-$CMD python-doc python-gtk2-doc python-imaging-doc python-matplotlib-doc
-$CMD python-numpy-doc python-reportlab-doc python-distribute-doc
-$CMD sdcc-doc doxygen-doc octave3.2-doc
-$CMD debian-policy
+$INSTALL bash-doc zsh-doc 
+$INSTALL binutils-doc gcc-doc gdb-doc vim-doc make-doc scons-doc
+$INSTALL glibc-doc wx2.8-doc splint-doc-html imagemagick-doc graphviz-doc
+$INSTALL python-doc python-gtk2-doc python-imaging-doc python-matplotlib-doc
+$INSTALL python-numpy-doc python-reportlab-doc python-distribute-doc
+$INSTALL sdcc-doc doxygen-doc octave3.2-doc
+$INSTALL debian-policy
+$INSTALL qrfcview
 
 # education
-$CMD kig
+$INSTALL kig
 
 # big packages 
-$CMD codeblocks eclipse virtualbox
-$CMD firefox chromium-browser
+$INSTALL codeblocks eclipse
+$INSTALL virtualbox dosbox
+$INSTALL firefox chromium-browser
 
+
+$AUTOEMOVE
