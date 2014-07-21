@@ -22,6 +22,7 @@ $CMD meld colordiff
 $CMD medit xournal alarm-clock-applet
 $CMD autoconf
 $CMD unison unison-gtk
+$CMD synaptic
 
 # security
 $CMD encfs cryptkeeper
@@ -32,6 +33,7 @@ $CMD gpick agave
 $CMD scrot
 $CMD imagemagick graphviz
 $CMD ttf-inconsolata ttf-unifont
+$CMD ttf-wqy-microhei ttf-wyq-zenhei
 $CMD freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
 $CMD pdfmod pdfshuffler rednotebook
 $CMD markdown python-markdown retext pandoc 
@@ -111,5 +113,5 @@ $CMD kig
 
 # big packages 
 $CMD codeblocks eclipse virtualbox
-
+$CMD firefox chromium-browser
 
