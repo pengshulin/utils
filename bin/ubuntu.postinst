@@ -13,7 +13,7 @@ fi
 # system tools
 $INSTALL vim vim-gtk emacs emacs23-nox emacs23-el rlwrap vbindiff
 $INSTALL htop tree ctags astyle sloccount hexedit ghex ascii zsh socat xbindkeys
-$INSTALL screen tmux
+$INSTALL screen tmux 
 $INSTALL ssh sshd gstm
 $INSTALL git gitk subversion cvs scons
 $INSTALL dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
@@ -23,7 +23,7 @@ $INSTALL meld colordiff
 $INSTALL medit xournal alarm-clock-applet
 $INSTALL autoconf
 $INSTALL unison unison-gtk
-$INSTALL synaptic
+$INSTALL synaptic bmon traceroute
 
 # security
 $INSTALL encfs cryptkeeper
@@ -35,7 +35,8 @@ $INSTALL scrot
 $INSTALL imagemagick graphviz
 $INSTALL fonts-inconsolata ttf-unifont
 $INSTALL ttf-wqy-microhei ttf-wyq-zenhei
-$INSTALL freemind libreoffice stardict sdcv espeak xchm kile okular fbreader
+$INSTALL freemind libreoffice espeak xchm kile okular fbreader
+$INSTALL goldendict stardict sdcv 
 $INSTALL pdfmod pdfshuffler rednotebook
 $INSTALL markdown python-markdown retext pandoc 
 $INSTALL antiword
@@ -111,7 +112,11 @@ $INSTALL debian-policy
 $INSTALL qrfcview
 
 # education
-$INSTALL kig
+$INSTALL geogebra kig stellarium celestia 
+$INSTALL marble anki gelemental mypaint
+
+# games
+$INSTALL gbrainy palapeli 
 
 # big packages 
 $INSTALL codeblocks eclipse
