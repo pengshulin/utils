@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# search US patent from uspto.gov
+# designed by Peng Shulin <trees_peng@163.com>
+
+#import urllib, urllib2, cookielib
+#import BeautifulSoup
+import sys
+from splinter import Browser
+import BeautifulSoup
+
+PAT_SEARCH_URL = 'http://patft.uspto.gov/netahtml/PTO/search-adv.htm'
+
+def flattenStr(string):
+    lines = string.split('\n')
+    return ' '.join([l.strip() for l in lines])
+
+def main( argv=None ):
+    if argv is None:
+        argv = sys.argv
+    if len(argv) < 2:
+        print 'syntax: search.uspat query1 <query2> ...'
+        print 'example: search.uspat an/google'
+        print 'field codes:'
+        print '  ttl: title'
+        print '  abst: abstract'
+        print '  an: assignee name'
+        return 1
+    browser = Browser()
+    browser.visit( PAT_SEARCH_URL )
+    browser.find_by_id('mytextarea').fill('\n'.join(argv[1:]))
+    browser.find_by_value('Search').click()
+    if not browser.is_text_present( 'No patents have matched your query'):
+        # extract results page by page 
+        page = 1
+        while True:
+            soup = BeautifulSoup.BeautifulSoup(browser.html)
+            tables = soup.findAll('table')
+            assert len(tables) == 3
+            elems = tables[1].findAll('a')
+            assert len(elems) > 0
+            texts = [flattenStr(e.text) for e in elems]
+            for l in range(len(texts)/2):
+                print texts[l*2], '\t', texts[l*2+1]
+            # switch to next page
+            page += 1
+            btn = browser.find_by_name('NextList%d'% page)
+            if not btn:
+                break
+            btn.click()
+    else:
+        print 'No patents matched'
+    browser.quit()
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())
+    
