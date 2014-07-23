@@ -4,7 +4,7 @@
 
 import urllib, urllib2, cookielib
 import BeautifulSoup
-import os,sys
+import os, sys
 
 PAT_FETCH_URL = 'http://www.pat2pdf.org/pat2pdf/foo.pl'
 PAT_FETCH_RESULT_PREFIX = 'http://www.pat2pdf.org/patents/pat'
@@ -45,18 +45,24 @@ def retry_down( patstr ):
         if download_pat( patid ):  break
         t -= 1
 
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+    if len(sys.argv) != 2:
+        print 'Usage: wget.uspat patent_id / patent_id_list_file'
+        return 1
+
+    arg = sys.argv[1]
+    if not os.path.isfile( arg ):
+        # patent id assigned
+        retry_down( arg )
+    else:
+        # patent_list_file assigned
+        for i in open( arg, 'r' ).readlines():
+            retry_down( i.split()[0] )
+    
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2:
-        arg = sys.argv[1]
-        if not os.path.isfile( arg ):
-            # patent id assigned
-            retry_down( arg )
-        else:
-            # patent_list_file assigned
-            for i in open( arg, 'r' ).readlines():
-                retry_down( i )
-    else:
-        print 'Usage: wget.uspat patent_id / patent_id_list_file'
-        
-    
+    sys.exit(main())
+
+
