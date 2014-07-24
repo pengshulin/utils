@@ -1,0 +1,5 @@
+#!/bin/sh
+
+keyword=$1
+uspat.search an/$keyword | tee $keyword
+
