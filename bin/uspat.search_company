@@ -1,5 +1,16 @@
-#!/bin/sh
+#!/usr/bin/env python
+import sys
+import os
 
-keyword=$1
-uspat.search an/$keyword | tee $keyword
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+    keywords=' and '.join(argv[1:])
+    logfile=' '.join(argv[1:])
+    cmd = 'uspat.search "an/(%s)" | tee "%s"'% (keywords, logfile)
+    print cmd
+    os.system( cmd )
+
+if __name__ == "__main__":
+    sys.exit(main())
 
