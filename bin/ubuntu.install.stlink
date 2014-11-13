@@ -2,8 +2,16 @@
 # ref to https://github.com/texane/stlik.git
 
 pushd ~
+
+if [[ -d ~/.stlink ]]; then
+pushd .stlink
+git pull
+make clean
+else
 git clone git://github.com/texane/stlink.git ~/.stlink
 pushd .stlink
+fi
+
 ./autogen.sh
 ./configure
 # TODO: patch 

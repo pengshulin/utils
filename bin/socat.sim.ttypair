@@ -11,7 +11,7 @@ else
   exit 1
 fi
 
-cmd="socat PTY,link=/dev/shm/$ttyA  PTY,link=/dev/shm/$ttyB"
+cmd="socat PTY,link=/dev/shm/$ttyA,raw,echo=0  PTY,link=/dev/shm/$ttyB,raw,echo=0"
 echo "$cmd"
 $cmd
 

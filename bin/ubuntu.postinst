@@ -1,7 +1,7 @@
 #!/bin/bash
 # packages needed after ubuntu-live-cd installation
 # Peng Shulin <trees_peng@163.com>
-
+set -e 
 INSTALL='sudo apt-get -q -y -m install'
 AUTOREMOVE='sudo apt-get autoremove'
 
@@ -11,19 +11,20 @@ then $INSTALL ia32-libs ;
 fi
 
 # system tools
-$INSTALL vim vim-gtk emacs emacs23-nox emacs23-el rlwrap vbindiff
+$INSTALL vim vim-gtk emacs rlwrap vbindiff
 $INSTALL htop tree ctags astyle sloccount hexedit ghex ascii zsh socat xbindkeys
 $INSTALL screen tmux 
-$INSTALL ssh sshd gstm
+$INSTALL ssh gstm
 $INSTALL git gitk subversion cvs scons
 $INSTALL dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
 $INSTALL gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors filelight
-$INSTALL enca convmv
+$INSTALL enca convmv cconv
 $INSTALL meld colordiff
 $INSTALL medit xournal alarm-clock-applet
 $INSTALL autoconf
 $INSTALL unison unison-gtk
-$INSTALL synaptic bmon traceroute
+$INSTALL synaptic bmon traceroute xdotool
+$INSTALL inotify-tools
 
 # security
 $INSTALL encfs cryptkeeper
@@ -34,7 +35,7 @@ $INSTALL gpick agave
 $INSTALL scrot
 $INSTALL imagemagick graphviz
 $INSTALL fonts-inconsolata ttf-unifont
-$INSTALL ttf-wqy-microhei ttf-wyq-zenhei
+$INSTALL fonts-wqy-microhei fonts-wqy-zenhei
 $INSTALL freemind libreoffice espeak xchm kile okular fbreader
 $INSTALL goldendict stardict sdcv 
 $INSTALL pdfmod pdfshuffler rednotebook
@@ -42,7 +43,10 @@ $INSTALL markdown python-markdown retext pandoc
 $INSTALL antiword
 $INSTALL samba system-config-samba
 $INSTALL dos2unix
-$INSTALL blender librecad
+$INSTALL blender
+$INSTALL librecad
+$INSTALL zim
+$INSTALL qiv gthumb eog
 
 # media
 $INSTALL vlc smplayer audacity
@@ -62,22 +66,21 @@ $INSTALL python-pygraphviz python-pygraph python-gvgen python-fontforge
 $INSTALL python-pyinotify python-inotifyx
 $INSTALL python-ldtp
 $INSTALL ipython
-$INSTALL eric 
+#$INSTALL eric 
 # lua
 $INSTALL lua5.1 
 # ruby
-$INSTALL ruby rubygems 
+$INSTALL ruby
 # lisp
 $INSTALL clisp clisp-doc sbcl sbcl-doc 
 $INSTALL slime
 $INSTALL guile-1.8 guile-1.8-doc guile-1.8-dev
-$INSTALL mit-scheme:i386 mit-scheme-doc 
+$INSTALL mit-scheme mit-scheme-doc 
 $INSTALL scheme2c scheme48 scheme9 tinyscheme scm slib 
 $INSTALL racket racket-doc
 
 # libraries
-# libreadline5:i386 is used by jlink
-$INSTALL libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5:i386
+$INSTALL libusb-1.0-0-dev libudev-dev libreadline-dev libreadline5
 $INSTALL ncurses-dev
 
 # embedded system dev.
@@ -88,27 +91,27 @@ $INSTALL gdb-msp430
 $INSTALL gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
 
 # electronics
-$INSTALL pcb gerbv geda kicad qucs
+$INSTALL pcb gerbv geda kicad 
+#qucs
 
 # scientific
-$INSTALL octave3.2 gnuplot-nox gnuplot-x11
+$INSTALL octave gnuplot
 $INSTALL veusz
 
 # copy vsftpd configuration files to /etc/vsftpd.*
 $INSTALL vsftpd
-#$INSTALL wine 
-#$INSTALL openfetion
-$INSTALL php5 apache2
+$INSTALL php5
+#INSTALL apache2
 $INSTALL sqliteman sqlitebrowser
 
 # documents
-$INSTALL bash-doc zsh-doc 
+#$INSTALL bash-doc zsh-doc 
 $INSTALL binutils-doc gcc-doc gdb-doc vim-doc make-doc scons-doc
 $INSTALL glibc-doc wx2.8-doc splint-doc-html imagemagick-doc graphviz-doc
 $INSTALL python-doc python-gtk2-doc python-imaging-doc python-matplotlib-doc
-$INSTALL python-numpy-doc python-reportlab-doc python-distribute-doc
-$INSTALL sdcc-doc doxygen-doc octave3.2-doc
-$INSTALL debian-policy
+#$INSTALL python-numpy-doc python-reportlab-doc python-distribute-doc
+#$INSTALL sdcc-doc doxygen-doc octave3.2-doc
+#$INSTALL debian-policy
 $INSTALL qrfcview
 
 # education
@@ -117,11 +120,13 @@ $INSTALL marble anki gelemental mypaint
 
 # games
 $INSTALL gbrainy palapeli 
+$INSTALL gmchess
 
 # big packages 
 $INSTALL codeblocks eclipse
 $INSTALL virtualbox dosbox
-$INSTALL firefox chromium-browser
+$INSTALL firefox chromium-browser midori
 
+$INSTALL chinese-calendar
 
 $AUTOEMOVE
