@@ -1,0 +1,17 @@
+#!/bin/sh
+# read messages from fifo and display it
+# the message maybe written by remote client
+
+FIFO='/tmp/rmessaged.fifo'
+ICON='/usr/share/icons/gnome/48x48/emotes/face-smile.png'
+if [ ! -p $FIFO ] ; then
+    mkfifo $FIFO
+fi
+
+while [ 1 ]; do
+    message=`cat $FIFO`
+    if [ -n "$message" ] ; then
+        notify-send -i $ICON "Remote message" "$message"
+    fi 
+    sleep 1
+done

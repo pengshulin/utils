@@ -9,17 +9,28 @@
 "xbindkeys_show" 
   control + shift + q
 
+# with Ctrl-Alt-<key>
+"mousepad"
+  control + alt + n
 "thunar"
   control + alt + e 
-
+"midori"
+  control + alt + m
+"synaptic-pkexec"
+  control + alt + s
 "xfce4-terminal"
   control + alt + t 
 "xfce4-terminal -x htop"
   control + alt + h 
 "xfce4-terminal -x ipython"
   control + alt + p
-"xfce4-terminal -x octave"
-  control + alt + o 
+"xfce4-terminal --working-directory=/richter/firmware.msp"
+  control + alt + r
+
+
+
+
+# print screen
 "xfce4-screenshooter -f"
   Print
 "xfce4-screenshooter -r"
@@ -28,6 +39,7 @@
   alt + Print
 
 
+# sound
 #"amixer -c 1 set Headphone toggle"
 "volume.sh toggle"
   alt + m 

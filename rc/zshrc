@@ -33,6 +33,8 @@ alias mt7='miniterm.py /dev/ttyUSB7'
 alias mt8='miniterm.py /dev/ttyUSB8'
 alias mt9='miniterm.py /dev/ttyUSB9'
 
+alias sc='scons'
+
 alias st-utild='REPEAT_DELAY=0.2 repeat_run st-util'
 
 alias remake='make clean && make'
@@ -41,7 +43,9 @@ alias git.commit.edit='git commit -am "edit"'
 alias git.push='git push'
 alias git.pull='git pull'
 alias git.status='git status'
+alias gits='git status'
 
+alias setenv.sim='export SIM=1'
 alias setenv.dev='export DEVELOPMENT=1'
 alias setenv.debug='export DEBUG=1'
 alias setenv.nodebug='export NODEBUG=1'
@@ -58,7 +62,7 @@ export EDITOR=vi
 #export PATH=$PATH:$DIR_UTILS/android-sdk-linux/platform-tools
 #export PATH=$PATH:$DIR_UTILS/android-sdk-linux/tools
 #export AP_PORT=9999
-
+export GREP_OPTIONS='--color=always'
 
 test -f ~/.extrarc && source ~/.extrarc
 
