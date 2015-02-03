@@ -12,6 +12,7 @@ fi
 
 svg_full=$1
 svg_base=`basename $1`
+svg_lock="$1.lock"
 
 # find if the svg monitor is ready 
 find_winid()
@@ -30,6 +31,7 @@ if [ -z "$id" ]; then
     sleep 1
     find_winid
     if [ -z "$id" ]; then
+        echo 'ERR'
         exit 1
     fi
 fi
@@ -42,7 +44,10 @@ kill_inkview()
 #trap kill_inkview INT
 
 echo $id
-while inotifywait -e close_write $svg_full; do
+while [ 1 ];
+do
+    inotifywait -e close_write $svg_full >&2 2>/dev/null
+    inotifywait -e delete $svg_lock >&2 2>/dev/null
     xdotool key --window $id Down Down Up Up
 done
 
