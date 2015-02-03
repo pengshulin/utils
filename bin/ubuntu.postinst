@@ -7,7 +7,8 @@ AUTOREMOVE='sudo apt-get autoremove'
 
 # 64-bit system only
 if [[ `uname -m` == 'x86_64' ]];
-then $INSTALL ia32-libs ;
+#then $INSTALL ia32-libs ;
+then $INSTALL lib32z1 ;
 fi
 
 # system tools

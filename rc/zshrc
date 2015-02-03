@@ -41,6 +41,7 @@ alias git.commit.edit='git commit -am "edit"'
 alias git.push='git push'
 alias git.pull='git pull'
 alias git.status='git status'
+alias gitcolordiff='git diff | colordiff | less'
 
 alias setenv.dev='export DEVELOPMENT=1'
 alias setenv.debug='export DEBUG=1'
