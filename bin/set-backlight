@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+# adjust samsung nb30 backlight
+# Peng Shulin <trees_peng@163.com>
+import sys
+
+DEV='/sys/class/backlight/intel_backlight/'
+MIN_BRIGHTNESS_PERCENT = 0.005
+DELTA_BRIGHTNESS_PERCENT = 0.05
+
+def main():
+    try:
+        cmd = sys.argv[1].strip().lower()
+        assert cmd in ['up', 'down', 'min', 'max']
+    except:
+        print 'syntax: set-backlight <up|down>'
+        return 1
+
+    new = actual = int(open(DEV+'actual_brightness', 'r').read())
+    max_brightness = int(open(DEV+'max_brightness', 'r').read())
+    min_brightness = int(max_brightness * MIN_BRIGHTNESS_PERCENT)
+
+    delta = (max_brightness - min_brightness) * DELTA_BRIGHTNESS_PERCENT
+    if cmd == 'up':
+        new = int(min(actual + delta, max_brightness))
+    elif cmd == 'down':
+        new = int(max(actual - delta, min_brightness))
+    elif cmd == 'min':
+        new = min_brightness
+    elif cmd == 'max':
+        new = max_brightness
+
+    if new != actual:
+        #print actual, '->', new
+        open(DEV+'brightness','w+').write(str(new))
+    return 0
+
+
+
+if __name__ == '__main__':
+    sys.exit(main())
+
+
