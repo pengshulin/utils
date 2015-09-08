@@ -5,6 +5,8 @@ fi
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
+alias lh='ls -h'
+alias llh='ls -l -h'
 alias vi='vim'
 alias vi.='vim .'
 alias v='vim'
