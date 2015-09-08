@@ -36,6 +36,8 @@ alias mt8='miniterm.py /dev/ttyUSB8'
 alias mt9='miniterm.py /dev/ttyUSB9'
 
 alias sc='scons'
+alias scc='scons -c'
+alias src='scons -c && scons'
 
 alias st-utild='REPEAT_DELAY=0.2 repeat_run st-util'
 
