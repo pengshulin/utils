@@ -1,4 +1,5 @@
 *.swp
 arm-none-eabi-build/*.tar.bz2
 arm-none-eabi-build/*.tar.gz
+tmp/
 
