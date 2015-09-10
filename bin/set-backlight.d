@@ -7,6 +7,7 @@ import time
 import signal
 
 FIFO = '/dev/shm/set-backlight.fifo'
+PID = '/dev/shm/set-backlight.pid'
 DEV='/sys/class/backlight/intel_backlight/'
 MIN_BRIGHTNESS_PERCENT = 0.005
 DELTA_BRIGHTNESS_PERCENT = 0.05
@@ -25,9 +26,12 @@ def adjust(n):
 
 
 if __name__ == '__main__':
+    if os.path.isfile( FIFO ):
+        os.remove( FIFO )
     if not os.path.exists( FIFO ):
         os.mkfifo(FIFO)
         os.chmod(FIFO, 0666)
+    open( PID, 'w+' ).write( str(os.getpid()) )
 
     while True:
         try:
@@ -43,7 +47,8 @@ if __name__ == '__main__':
             elif cmd == 'mid':
                 adjust((min_brightness + max_brightness)/2)
         except KeyboardInterrupt:
-            os.remove('/dev/shm/set-backlight.fifo')
+            os.remove( FIFO )
+            os.remove( PID )
             sys.exit()
         except:
             pass

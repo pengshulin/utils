@@ -1,0 +1,19 @@
+#! /bin/sh
+
+
+. /lib/lsb/init-functions
+
+
+case "$1" in
+  start)
+	log_action_msg "Start NB30 set-backlight daemon"
+	/sbin/start-stop-daemon --start --oknodo --exec /usr/local/bin/set-backlight.d &
+	;;
+  stop)
+	log_action_msg "Stop NB30 set-backlight daemon"
+	/sbin/start-stop-daemon --stop --oknodo --pidfile=/dev/shm/set-backlight.pid --remove-pidfile
+	;;
+  *)
+	exit 3
+	;;
+esac
