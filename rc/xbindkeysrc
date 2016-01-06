@@ -24,9 +24,6 @@
   control + alt + h 
 "xfce4-terminal -x ipython"
   control + alt + p
-"xfce4-terminal --working-directory=/richter/firmware.msp"
-  control + alt + r
-
 
 
 

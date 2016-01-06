@@ -131,4 +131,4 @@ $INSTALL firefox chromium-browser midori
 
 $INSTALL chinese-calendar
 
-$AUTOEMOVE
+$AUTOREMOVE
