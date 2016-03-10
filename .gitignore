@@ -1,5 +1,7 @@
 *.swp
-arm-none-eabi-build/*.tar.bz2
-arm-none-eabi-build/*.tar.gz
+arm-none-eabi-build/binutils-*
+arm-none-eabi-build/gcc-*
+arm-none-eabi-build/gdb-*
+arm-none-eabi-build/newlib-*
 tmp/
 

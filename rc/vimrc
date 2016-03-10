@@ -10,21 +10,46 @@ set et
 set ts=4
 set sw=4
 
+" current directory browser
 map <C-o><C-d>  <ESC>:o .<CR>
-map <C-o><C-c>  <ESC>:o<CR>
+
+
+
+
+" F5 reload current file
 map <F5>   <ESC>:o<CR>
-"map <C-v>  <ESC><C-d><C-d>kkk
-"map <C-c><C-l>  <ESC>:%s/\s\+$//g<CR>
 
-"map <C-w><C-w>  <ESC>:w<CR>
-"map <C-q><C-q>  <ESC>:q<CR>
+" F9 call build
+if filereadable("SConstruct")
+    map <F9>   <ESC>:!scons<CR>
+elseif filereadable("Makefile") || filereadable("makefile")
+    map <F9>   <ESC>:make<CR>
+endif
+
+" F10 call build clean
+if filereadable("SConstruct")
+    map <F10>   <ESC>:!scons -c<CR>
+elseif filereadable("Makefile") || filereadable("makefile")
+    map <F10>   <ESC>:make clean<CR>
+endif
+
+" THIS KEY MAY BE FILTERED
+"" F11 flash erase
+"if filereadable("erase") && executable("./erase")
+"    map <F11>  <ESC>:!./erase<CR>
+"elseif filereadable("Makefile") || filereadable("makefile")
+"    map <F11>  <ESC>:make erase<CR>
+"endif
+
+" F12 flash download
+if filereadable("flash") && executable("./flash")
+    map <F12>  <ESC>:!./flash<CR>
+elseif filereadable("Makefile") || filereadable("makefile")
+    map <F12>  <ESC>:make flash<CR>
+endif
 
 
-map <F9>   <ESC>:make<CR>
-map <F10>  <ESC>:cp<CR>
-map <F11>  <ESC>:cn<CR>
-map <F12>  <ESC>:make flash<CR>
-
+" compiler error check
 map <C-c><C-l>  <ESC>:cl<CR>
 map <C-c><C-p>  <ESC>:cp<CR>
 map <C-c><C-n>  <ESC>:cn<CR>
