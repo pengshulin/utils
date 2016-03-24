@@ -10,42 +10,41 @@ set et
 set ts=4
 set sw=4
 
+
 " current directory browser
-map <C-o><C-d>  <ESC>:o .<CR>
-
-
+map <C-l>  <ESC>:o .<CR>
 
 
 " F5 reload current file
 map <F5>   <ESC>:o<CR>
 
 " F9 call build
-if filereadable("SConstruct")
-    map <F9>   <ESC>:!scons<CR>
-elseif filereadable("Makefile") || filereadable("makefile")
+if filereadable("Makefile") || filereadable("makefile")
     map <F9>   <ESC>:make<CR>
+elseif filereadable("SConstruct")
+    map <F9>   <ESC>:!scons<CR>
 endif
 
 " F10 call build clean
-if filereadable("SConstruct")
-    map <F10>   <ESC>:!scons -c<CR>
-elseif filereadable("Makefile") || filereadable("makefile")
+if filereadable("Makefile") || filereadable("makefile")
     map <F10>   <ESC>:make clean<CR>
+elseif filereadable("SConstruct")
+    map <F10>   <ESC>:!scons -c<CR>
 endif
 
 " THIS KEY MAY BE FILTERED
 "" F11 flash erase
-"if filereadable("erase") && executable("./erase")
-"    map <F11>  <ESC>:!./erase<CR>
-"elseif filereadable("Makefile") || filereadable("makefile")
+"if filereadable("Makefile") || filereadable("makefile")
 "    map <F11>  <ESC>:make erase<CR>
+"elseif filereadable("erase") && executable("./erase")
+"    map <F11>  <ESC>:!./erase<CR>
 "endif
 
 " F12 flash download
-if filereadable("flash") && executable("./flash")
-    map <F12>  <ESC>:!./flash<CR>
-elseif filereadable("Makefile") || filereadable("makefile")
+if filereadable("Makefile") || filereadable("makefile")
     map <F12>  <ESC>:make flash<CR>
+elseif filereadable("flash") && executable("./flash")
+    map <F12>  <ESC>:!./flash<CR>
 endif
 
 
