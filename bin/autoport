@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# select the first enumerated port and exec remaining commands
+
+if [ -z "$PORTS" ]; then
+    if [ -z "$PORT" ]; then
+        port=`find /dev -type c -name "ttyUSB*" | head -1`
+    else
+        port=$PORT
+    fi
+else
+port=`echo $PORTS | sed s/,/\\\n/g | head -1`
+fi
+
+echo -e "\e[34mPORT=$port $@\e[0m"
+PORT=$port exec $@
+

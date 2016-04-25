@@ -9,7 +9,9 @@
 "xbindkeys_show" 
   control + shift + q
 
-# with Ctrl-Alt-<key>
+# applications
+"firefox"
+  control + alt + f
 "mousepad"
   control + alt + n
 "thunar"
@@ -25,6 +27,10 @@
 "xfce4-terminal -x ipython"
   control + alt + p
 
+# serial port debug
+"xfce4-terminal -x miniterm.py /dev/ttyUSB0"
+  control + alt + KP_0
+
 
 
 # print screen
@@ -39,7 +45,7 @@
 # sound
 #"amixer -c 1 set Headphone toggle"
 "volume.sh toggle"
-  alt + m 
+  alt + slash
 #"amixer -c 1 set Headphone 5%- unmute"
 "volume.sh down"
   alt + comma
@@ -47,11 +53,10 @@
 "volume.sh up"
   alt + period
 "gmusicbrowser -cmd PlayPause"
-  alt + shift + m
+  alt + shift + slash
 "gmusicbrowser -cmd PrevSong"
   alt + shift + comma
 "gmusicbrowser -cmd NextSong"
   alt + shift + period
-
 
 
