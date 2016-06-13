@@ -26,10 +26,14 @@
   control + alt + h 
 "xfce4-terminal -x ipython"
   control + alt + p
+"zim"
+  control + alt + z
 
-# serial port debug
-"xfce4-terminal -x miniterm.py /dev/ttyUSB0"
-  control + alt + KP_0
+# backlight control
+"xbacklight -dec 10"
+  control + alt + bracketleft
+"xbacklight -inc 10"
+  control + alt + bracketright
 
 
 
