@@ -18,8 +18,6 @@
   control + alt + e 
 "midori"
   control + alt + m
-"synaptic-pkexec"
-  control + alt + s
 "xfce4-terminal"
   control + alt + t 
 "xfce4-terminal -x htop"
@@ -34,8 +32,10 @@
   control + alt + bracketleft
 "xbacklight -inc 10"
   control + alt + bracketright
-
-
+"xbacklight -set 0"
+  control + alt + shift + bracketleft
+"xbacklight -set 100"
+  control + alt + shift + bracketright
 
 # print screen
 "xfce4-screenshooter -f"
@@ -49,18 +49,18 @@
 # sound
 #"amixer -c 1 set Headphone toggle"
 "volume.sh toggle"
-  alt + slash
+  control + alt + slash
 #"amixer -c 1 set Headphone 5%- unmute"
 "volume.sh down"
-  alt + comma
+  control + alt + comma
 #"amixer -c 1 set Headphone 5%+ unmute"
 "volume.sh up"
-  alt + period
+  control + alt + period
 "gmusicbrowser -cmd PlayPause"
-  alt + shift + slash
+  control + alt + shift + slash
 "gmusicbrowser -cmd PrevSong"
-  alt + shift + comma
+  control + alt + shift + comma
 "gmusicbrowser -cmd NextSong"
-  alt + shift + period
+  control + alt + shift + period
 
 
