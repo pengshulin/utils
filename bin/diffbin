@@ -19,6 +19,8 @@ if [ $CMDNAME = 'colordiffbin' ] ; then
 else
     diff $DUMP1 $DUMP2
 fi
+ret=$?
 
 rm -f $DUMP1 $DUMP2
+return $ret
 
