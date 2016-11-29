@@ -36,6 +36,17 @@ alias mt6='miniterm.py /dev/ttyUSB6'
 alias mt7='miniterm.py /dev/ttyUSB7'
 alias mt8='miniterm.py /dev/ttyUSB8'
 alias mt9='miniterm.py /dev/ttyUSB9'
+alias mta0='miniterm.py /dev/ttyACM0'
+alias mta1='miniterm.py /dev/ttyACM1'
+alias mta2='miniterm.py /dev/ttyACM2'
+alias mta3='miniterm.py /dev/ttyACM3'
+alias mta4='miniterm.py /dev/ttyACM4'
+alias mta5='miniterm.py /dev/ttyACM5'
+alias mta6='miniterm.py /dev/ttyACM6'
+alias mta7='miniterm.py /dev/ttyACM7'
+alias mta8='miniterm.py /dev/ttyACM8'
+alias mta9='miniterm.py /dev/ttyACM9'
+
 
 alias sc='scons'
 alias scc='scons -c'
@@ -47,6 +58,8 @@ alias st-utild='REPEAT_DELAY=0.2 repeat_run st-util'
 alias sshx='ssh -X'
 
 alias remake='make clean && make'
+
+alias rmswp='find ~ /data -name "*.swp" -print -delete'
 
 alias git.commit.edit='git commit -am "edit"'
 alias git.push='git push'
