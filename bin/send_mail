@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+# send mail with command line
+import os
+import sys
+import smtplib 
+from json import dumps, loads 
+from email import encoders
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email.utils import COMMASPACE,formatdate
+
+
+def send_mail(server, fro, to, subject, text, files=[]): 
+    assert type(server) == dict 
+    assert type(to) == list 
+    assert type(files) == list 
+ 
+    msg = MIMEMultipart() 
+    msg['From'] = fro 
+    msg['Subject'] = subject 
+    msg['To'] = COMMASPACE.join(to) #COMMASPACE==', ' 
+    msg['Date'] = formatdate(localtime=True) 
+    msg.attach(MIMEText(text, _charset='utf-8')) 
+ 
+    for f in files: 
+        part = MIMEBase('application', 'octet-stream') #'octet-stream': binary data 
+        part.set_payload(open(f, 'rb').read()) 
+        encoders.encode_base64(part) 
+        part.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(f)) 
+        msg.attach(part) 
+ 
+    smtp = smtplib.SMTP(server['name'], timeout=30) 
+    smtp.login(server['user'], server['passwd']) 
+    smtp.sendmail(fro, to, msg.as_string()) 
+    smtp.close()
+
+
+def load_config(config_file):
+    try:
+        ret = loads(open(config_file, 'r').read().strip())
+    except:
+        # config error, re-input
+        server_name = raw_input('server name: ').strip()
+        user_name = raw_input('user name: ').strip()
+        passwd = raw_input('password: ').strip()
+        ret = { 'server': { 'name': server_name,
+                            'user': user_name,
+                            'passwd': passwd } }
+        # write config file
+        with open(config_file, 'w+') as wf:
+            wf.write( dumps(ret) )
+        print( 'config written to %s'% config_file )
+    return ret
+    
+
+def main(argv):
+    try:
+        tos = [i.strip() for i in argv[1].split(',')]
+        subject = sys.argv[2]
+        data_file = sys.argv[3]
+        attach_files = sys.argv[4:] 
+    except:
+        print( 'syntax: %s <addr1,addr2,...> <subject> <data_file> <attach_file1> <attach_file2> ...'% argv[0] )
+        return 1
+    
+    if data_file == 'NULL':
+        data = 'EMPTY'
+    else:
+        try:
+            data = open(data_file, 'r').read().decode(encoding='utf8').strip()
+        except Exception, e:
+            print( 'failed to read data file', str(e) )
+            return 1
+
+    config_file = '.%s.config'% os.path.basename(argv[0])
+    config = load_config( os.path.join(os.getenv('HOME'), config_file) )
+    config_server = config['server']
+    if not config_server['name'] or not config_server['user'] or not config_server['passwd']:
+        print( 'config error' )
+        return 1
+    
+    send_mail( config['server'], config['server']['user'], tos, subject, data, files=attach_files )
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
+
