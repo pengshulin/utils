@@ -28,9 +28,9 @@ def send_mail(server, fro, to, subject, text, files=[]):
         part = MIMEBase('application', 'octet-stream') #'octet-stream': binary data 
         part.set_payload(open(f, 'rb').read()) 
         encoders.encode_base64(part) 
-        part.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(f)) 
+        part.add_header('Content-Disposition', 'attachment', filename=('utf-8', 'zh_cn', os.path.basename(f)) ) 
         msg.attach(part) 
- 
+    #print msg 
     smtp = smtplib.SMTP(server['name'], timeout=30) 
     smtp.login(server['user'], server['passwd']) 
     smtp.sendmail(fro, to, msg.as_string()) 
