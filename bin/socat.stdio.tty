@@ -1,0 +1,19 @@
+#!/bin/sh -e
+# bind tty with stdin using socat
+#
+
+if [ $# != 1 ] ; then
+  echo 'Argument: tty-device-file'
+  exit
+fi
+
+if ! [ -c $1 ] ; then
+  echo "$1" should be a tty device file
+  exit
+fi 
+
+
+cmd="socat STDIO,raw,echo=0 $1,rawer"
+
+echo "$cmd"
+$cmd
