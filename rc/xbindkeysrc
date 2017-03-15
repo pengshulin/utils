@@ -16,7 +16,7 @@
   control + alt + n
 "thunar"
   control + alt + e 
-"mypaint"
+"mousepad"
   control + alt + m
 "xfce4-terminal"
   control + alt + t 
@@ -26,11 +26,22 @@
   control + alt + p
 "zim"
   control + alt + z
+"vokoscreen"
+  control + alt + v
+
 
 
 # display setting
 "xfce4-display-settings --minimal"
   control + alt + grave
+"xrandr.mode 1"
+  control + alt + 1
+"xrandr.mode 2"
+  control + alt + 2
+"xrandr.mode 3"
+  control + alt + 3
+"xrandr.mode 4"
+  control + alt + 4
 
 
 # backlight control

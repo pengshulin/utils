@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+# adjust screen with shortcut keys
+# Peng Shulin <trees_peng@163.com> 2017
+import sys
+from os import system
+from subprocess import check_output
+
+
+def parseMonitorsConfig():
+    MODE = []
+    cfg = check_output(['xrandr', '-q'])
+    for l in cfg.splitlines():
+        if l.startswith('Screen'):
+            continue
+        if l.startswith('  '):
+            pass
+        else:
+            ls = l.split(' ')
+            name = ls[0]
+            connected = bool(ls[1] == 'connected')
+            MODE.append( {'name':name, 'connected':connected} )
+    return MODE
+
+
+def main(argv):
+    if len(argv) != 2:
+        return
+    config = parseMonitorsConfig()
+    
+    monitor_id, monitor_mode = int(argv[1][0]) - 1, argv[1][1:]
+    if monitor_id >= len(config):
+        print 'monitor id %s out of range'% monitor_id
+        return
+    if not config[monitor_id]['connected']:
+        print 'monitor %s not connected'% config[monitor_id]['name']
+        return
+    monitor_name = config[monitor_id]['name']
+    cmd = 'xrandr'
+    for s in config:
+        if not s['connected']:
+            continue
+        args = ' --output %s'% s['name']
+        if s['name'] == monitor_name:
+            args += ' --auto' 
+            args += ' --rotate' 
+            if monitor_mode == 'l':
+                args += ' left' 
+            elif monitor_mode == 'r':
+                args += ' right' 
+            elif monitor_mode == 'i':
+                args += ' inverted' 
+            else:
+                args += ' normal' 
+        else:
+            args += ' --off' 
+        cmd += args
+    print cmd
+    system( cmd )
+
+
+if __name__ == '__main__':
+    main(sys.argv)
