@@ -34,14 +34,19 @@
 # display setting
 "xfce4-display-settings --minimal"
   control + alt + grave
-"xrandr.mode 1"
+"xrandr.mode 1"  # select 1st monitor
   control + alt + 1
-"xrandr.mode 2"
+"xrandr.mode 2"  # select 2nd monitor
   control + alt + 2
-"xrandr.mode 3"
+"xrandr.mode 3"  # select 3rd monitor
   control + alt + 3
-"xrandr.mode 4"
+"xrandr.mode 4"  # select 4th monitor
   control + alt + 4
+"xrandr.mode c+"  # rotate current monitor clockwise
+  control + alt + equal
+"xrandr.mode c-"  # rotate current monitor anti-clockwise
+  control + alt + minus
+
 
 
 # backlight control

@@ -13,12 +13,19 @@ def parseMonitorsConfig():
         if l.startswith('Screen'):
             continue
         if l.startswith('  '):
-            pass
+            if l.find('*') != -1:
+                MODE[-1]['current'] = True
         else:
             ls = l.split(' ')
             name = ls[0]
             connected = bool(ls[1] == 'connected')
-            MODE.append( {'name':name, 'connected':connected} )
+            m=l.split(' (')[0].split(' ')[-1]
+            if m in ['left', 'right', 'inverted']:
+                mode = m
+            else:
+                mode = 'normal'
+            MODE.append( {'name':name, 'connected':connected, 
+                          'current':False, 'mode':mode} )
     return MODE
 
 
@@ -26,14 +33,36 @@ def main(argv):
     if len(argv) != 2:
         return
     config = parseMonitorsConfig()
-    
-    monitor_id, monitor_mode = int(argv[1][0]) - 1, argv[1][1:]
-    if monitor_id >= len(config):
-        print 'monitor id %s out of range'% monitor_id
-        return
-    if not config[monitor_id]['connected']:
-        print 'monitor %s not connected'% config[monitor_id]['name']
-        return
+    #print config
+
+    if argv[1][0] == 'c':
+        # 'c' for current, search from the list
+        for i in range(len(config)):
+            if config[i]['current'] and config[i]['connected']:
+                monitor_id = i
+    else:
+        monitor_id = int(argv[1][0]) - 1
+        if monitor_id >= len(config):
+            print 'monitor id %s out of range'% monitor_id
+            return
+        if not config[monitor_id]['connected']:
+            print 'monitor %s not connected'% config[monitor_id]['name']
+            return
+    monitor_mode = argv[1][1:]
+    if monitor_mode in '+-':
+        # rotate mode
+        if config[monitor_id]['mode'] == 'normal':
+            monitor_mode = 'r' if monitor_mode == '+' else 'l'
+        elif config[monitor_id]['mode'] == 'left':
+            monitor_mode = '' if monitor_mode == '+' else 'i'
+        elif config[monitor_id]['mode'] == 'right':
+            monitor_mode = 'i' if monitor_mode == '+' else ''
+        elif config[monitor_id]['mode'] == 'inverted':
+            monitor_mode = 'l' if monitor_mode == '+' else 'r'
+        else:
+            monitor_mode = ''
+    #print monitor_id, monitor_mode
+
     monitor_name = config[monitor_id]['name']
     cmd = 'xrandr'
     for s in config:
