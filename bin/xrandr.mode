@@ -49,7 +49,7 @@ def main(argv):
             print 'monitor %s not connected'% config[monitor_id]['name']
             return
     monitor_mode = argv[1][1:]
-    if monitor_mode in '+-':
+    if monitor_mode and monitor_mode in '+-':
         # rotate mode
         if config[monitor_id]['mode'] == 'normal':
             monitor_mode = 'r' if monitor_mode == '+' else 'l'
