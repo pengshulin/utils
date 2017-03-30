@@ -46,6 +46,7 @@ alias mta6='miniterm.py /dev/ttyACM6'
 alias mta7='miniterm.py /dev/ttyACM7'
 alias mta8='miniterm.py /dev/ttyACM8'
 alias mta9='miniterm.py /dev/ttyACM9'
+alias ev='evince'
 
 
 alias sc='scons'

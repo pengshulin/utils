@@ -1,0 +1,19 @@
+#!/bin/sh
+# convrt markdown --> html --> pdf 
+# princepdf is required
+# PengShulin <trees_peng@163.com>
+set -e
+
+SOURCE="$1"
+TARGET="$2"
+TMP="~$SOURCE.html"
+
+test -f "$SOURCE" || exit 1
+
+test -z "$TARGET" && TARGET="$SOURCE.pdf"
+
+echo '<meta charset="utf-8">' > $TMP
+markdown $SOURCE >> $TMP && prince -o $TARGET $TMP && rm $TMP
+
+
+
