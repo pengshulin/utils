@@ -54,6 +54,7 @@ endif
 " F12 flash download
 if filereadable("Makefile") || filereadable("makefile")
     map <F12>  <ESC>:make flash<CR>
+    map <S-F12>  <ESC>:make flash2<CR>
 elseif filereadable("flash") && executable("./flash")
     map <F12>  <ESC>:!./flash<CR>
 endif
