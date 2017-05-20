@@ -1,0 +1,121 @@
+#!/usr/bin/env python
+# utility to control(erase/program) mcu
+# designed by PengShulin <trees_peng@163.com> 2017
+from os import getenv, system, getcwd
+from os.path import abspath, basename, join
+from sys import argv, exit, stdout
+from glob import glob
+from telnetlib import Telnet
+
+
+prog_supported = ['emu_util_stlink', 'emu_util_openocd']
+prog_name = basename(argv[0])
+
+def halt(msg=None, exit_code=1):
+    if msg:
+        print msg
+    exit(exit_code)
+
+if not prog_name in prog_supported:
+    halt( "%s not supported" % prog_name )
+
+cmd_supported = ['erase', 'flash', 'reset']
+if len(argv) < 2:
+    halt( 'no command specified' )
+
+cmd_type = argv[1]
+if not cmd_type in cmd_supported:
+    halt( 'cmd %s not supported'% cmd_type )
+
+def clear_existing_daemon():
+    if prog_name == 'emu_util_stlink':
+        system( 'killall -q st-util st-flash' )
+    elif prog_name == 'emu_util_openocd':
+        system( 'killall -q openocd' )
+ 
+
+_bool_true_list = ['1', 't', 'T', 'y', 'Y']
+def getenv_bool( key, default=None ):
+    ret = getenv(key, default)
+    return False if ret is None else bool(ret in _bool_true_list)
+ 
+
+def getFlashFile():
+    if len(argv) >= 3:
+        return argv[2]
+    if prog_name == 'emu_util_stlink':
+        typename='bin'
+    else:
+        typename='elf'
+    if getenv_bool("DEBUG"):
+        search_name = '*_dbg.%s'% typename
+    else:     
+        search_name = '*.%s'% typename
+    search_result = glob(search_name)
+    if not search_result:
+        return None
+    else:
+        return join(getcwd(), search_result[0])
+
+
+def do_cmd( cmdline ):
+    print cmdline
+    system( cmdline )
+
+def telnet_and_cmd( addr, port, cmd ):
+    tn = Telnet( addr, port )
+    print 'openocd daemon connected'
+    stdout.write( tn.read_until('> ') )
+    tn.write( cmd + '\r\n' )
+    print cmd
+    stdout.flush() 
+    ret = ''
+    while True:
+        read = tn.read_until('> ', 0.5)
+        ret += read
+        stdout.write(read)
+        stdout.flush() 
+        if ret[-2:] == '> ':
+            break
+    tn.close()
+
+#############################################################################
+def do_erase():
+    if prog_name == 'emu_util_stlink':
+        clear_existing_daemon() 
+        do_cmd( 'st-flash erase' )
+    elif prog_name == 'emu_util_openocd':
+        cmd = 'flash erase_sector 0 0 last'
+        telnet_and_cmd('localhost', 4444, cmd )
+
+#############################################################################
+def do_reset():
+    if prog_name == 'emu_util_stlink':
+        clear_existing_daemon() 
+        do_cmd( 'st-flash reset' )
+    elif prog_name == 'emu_util_openocd':
+        cmd = 'reset run'
+        telnet_and_cmd('localhost', 4444, cmd )
+
+#############################################################################
+def do_flash():
+    fname = getFlashFile()
+    if fname is None:
+        halt( 'no flash file found' )
+    if prog_name == 'emu_util_stlink':
+        clear_existing_daemon() 
+        do_cmd( 'st-flash write %s 0x08000000' %(fname) )
+    elif prog_name == 'emu_util_openocd':
+        cmd = 'program %s verify reset'% fname
+        telnet_and_cmd('localhost', 4444, cmd)
+ 
+ 
+       
+if cmd_type == 'erase':
+    do_erase()
+elif cmd_type == 'reset':
+    do_reset()    
+elif cmd_type == 'flash':
+    do_flash()
+
+
