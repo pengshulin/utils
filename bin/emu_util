@@ -63,7 +63,10 @@ def do_cmd( cmdline ):
     system( cmdline )
 
 def telnet_and_cmd( addr, port, cmd ):
-    tn = Telnet( addr, port )
+    try:
+        tn = Telnet( addr, port )
+    except Exception, e:
+        halt( str(e) )
     print 'openocd daemon connected'
     stdout.write( tn.read_until('> ') )
     tn.write( cmd + '\r\n' )
