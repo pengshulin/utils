@@ -64,6 +64,8 @@ endif
 map <C-c><C-l>  <ESC>:cl<CR>
 map <C-c><C-p>  <ESC>:cp<CR>
 map <C-c><C-n>  <ESC>:cn<CR>
+map <F7>  <ESC>:cp<CR>
+map <F8>  <ESC>:cn<CR>
 
 " author info
 map <C-\>    <ESC>aPeng Shulin <trees_peng@163.com> 2017<cr><ESC>

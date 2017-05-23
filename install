@@ -2,9 +2,18 @@
 
 DESTDIR=/usr/local/bin
 find bin -type f -print -exec install {} $DESTDIR/ \;
-find bin -type l -print -exec install {} $DESTDIR/ \;
 
 if [ -L $DESTDIR/colordiffbin ] ; then
     rm $DESTDIR/colordiffbin
 fi    
 ln -s $DESTDIR/diffbin $DESTDIR/colordiffbin 
+
+if [ -L $DESTDIR/emu_util_stlink ] ; then
+    rm $DESTDIR/emu_util_stlink
+fi 
+ln -s $DESTDIR/emu_util $DESTDIR/emu_util_stlink
+
+if [ -L $DESTDIR/emu_util_cmsisdap ] ; then
+    rm $DESTDIR/emu_util_cmsisdap
+fi 
+ln -s $DESTDIR/emu_util $DESTDIR/emu_util_cmsisdap

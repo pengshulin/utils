@@ -101,7 +101,7 @@ def do_reset():
         telnet_and_cmd('localhost', 4444, cmd )
 
 #############################################################################
-def do_flash():
+def do_flash(verify=True, reset=True):
     fname = getFlashFile()
     if fname is None:
         halt( 'no flash file found' )
@@ -109,7 +109,11 @@ def do_flash():
         clear_existing_daemon() 
         do_cmd( 'st-flash write %s 0x08000000' %(fname) )
     elif prog_name == 'emu_util_openocd':
-        cmd = 'program %s verify reset'% fname
+        cmd = 'program %s'% fname
+        if verify:
+            cmd += ' verify'
+        if reset:
+            cmd += ' reset'
         telnet_and_cmd('localhost', 4444, cmd)
  
  
@@ -119,6 +123,6 @@ if cmd_type == 'erase':
 elif cmd_type == 'reset':
     do_reset()    
 elif cmd_type == 'flash':
-    do_flash()
+    do_flash(verify=False)
 
 
