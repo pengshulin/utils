@@ -1,8 +1,9 @@
 #export VER_BINUTILS=2.19.1
 export VER_BINUTILS=2.22
 #export VER_NEWLIB=1.17.0
-export VER_NEWLIB=1.18.0
+#export VER_NEWLIB=1.18.0
 #export VER_NEWLIB=2.0.0
+export VER_NEWLIB=2.5.0.20170519
 export VER_GCC=4.4.0
 #export VER_GCC=4.6.3
 #export VER_GDB=6.8
@@ -10,7 +11,7 @@ export VER_GDB=7.6
 
 export TARGET=arm-none-eabi
 export TARGET_DIR="/opt/$TARGET"
-export NEWLIB_SRC="/opt/newlib-$VER_NEWLIB"
+export NEWLIB_SRC="/opt/newlib/newlib-$VER_NEWLIB"
 
 export BASE_CONFIG="-v --quiet --target=$TARGET --prefix=$TARGET_DIR --enable-interwork --enable-multilib --with-gnu-ld --with-gnu-as --disable-nls --disable-werror"
 

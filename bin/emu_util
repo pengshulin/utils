@@ -55,7 +55,7 @@ def getFlashFile():
     if not search_result:
         return None
     else:
-        return join(getcwd(), search_result[0])
+        return join(getcwd(), search_result[-1])
 
 
 def do_cmd( cmdline ):
