@@ -17,3 +17,10 @@ if [ -L $DESTDIR/emu_util_cmsisdap ] ; then
     rm $DESTDIR/emu_util_cmsisdap
 fi 
 ln -s $DESTDIR/emu_util $DESTDIR/emu_util_cmsisdap
+
+if [ -L $DESTDIR/analysis_mapfile_gui.py ] ; then
+    rm $DESTDIR/analysis_mapfile_gui.py
+fi 
+ln -s $DESTDIR/analysis_mapfile.py $DESTDIR/analysis_mapfile_gui.py
+
+
