@@ -90,6 +90,7 @@ $INSTALL openocd sdcc usbprog usbprog-gui
 $INSTALL gcc-msp430 mspdebug
 $INSTALL gdb-msp430
 $INSTALL gcc-avr avr-libc gdb-avr binutils-avr  avrdude uisp
+$INSTALL gcc-arm-none-eabi binutils-arm-none-eabi gdb-arm-none-eabi libnewlib-arm-none-eabi
 
 # electronics
 $INSTALL pcb gerbv geda kicad 
