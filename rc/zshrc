@@ -23,7 +23,7 @@ alias du='du -h'
 alias df='df -h'
 alias dpython='python -m pdb'
 alias lstty='ls /dev/tty[AU]*'
-alias lsttybyid='ls -l -o /dev/serial/by-id'
+alias lsttybyid="ls -l -o /dev/serial/by-id | awk '{n=split(\$10,sn,\"tty\"); if(n>1) print sn[2] \"\t\" \$8}' | sort"
 alias du.sort.less='du -h | sort -h | less +G'
 
 alias mts0='miniterm.py /dev/ttyS0'
@@ -93,6 +93,7 @@ alias setenv.dev='export DEVELOPMENT=1'
 alias setenv.debug='export DEBUG=1'
 alias setenv.nodebug='export NODEBUG=1'
 alias arm-none-eabi-gdbtui='arm-none-eabi-gdb --tui'
+alias arm-none-eabi-cgdb='cgdb -d arm-none-eabi-gdb'
 
 alias grep='grep --color=always'
 

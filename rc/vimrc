@@ -70,3 +70,7 @@ map <F8>  <ESC>:cn<CR>
 " author info
 map <C-\>    <ESC>aPeng Shulin <trees_peng@163.com> 2017<cr><ESC>
 
+
+"set modeline
+
+
