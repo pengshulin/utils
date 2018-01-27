@@ -12,9 +12,10 @@ fi
 
 # system tools
 $INSTALL vim vim-gtk emacs rlwrap vbindiff
-$INSTALL htop tree ctags astyle sloccount hexedit ghex ascii zsh socat xbindkeys
+$INSTALL htop tree ctags astyle sloccount hexedit ghex ascii 
+$INSTALL socat xbindkeys silversearcher-ag
 $INSTALL screen tmux 
-$INSTALL ssh gstm
+$INSTALL zsh ssh gstm
 $INSTALL git gitk subversion cvs scons
 $INSTALL dpkg-dev p7zip p7zip-rar libpcap-dev arp-scan nast
 $INSTALL gparted gsmartcontrol cutecom beep wireshark tshark lm-sensors filelight
@@ -36,7 +37,7 @@ $INSTALL scrot
 $INSTALL imagemagick graphviz
 $INSTALL fonts-inconsolata ttf-unifont
 $INSTALL fonts-wqy-microhei fonts-wqy-zenhei
-$INSTALL freemind libreoffice espeak xchm kile okular fbreader
+$INSTALL freeplane libreoffice espeak xchm kile okular fbreader
 $INSTALL goldendict stardict sdcv 
 $INSTALL pdfmod pdfshuffler rednotebook
 $INSTALL markdown python-markdown retext pandoc 
@@ -60,6 +61,7 @@ $INSTALL python-dev
 $INSTALL idle python-scipy python-serial python-wxgtk2.8 python-dbg pylint
 $INSTALL python-matplotlib python-wxglade python-pygame python-beautifulsoup
 $INSTALL python-ctypes python-cheetah python-markdown python-memcache python-svn
+$INSTALL python-cairosvg
 $INSTALL python-setuptools python-unit python-unittest2 python-testtools
 $INSTALL python-pip 
 $INSTALL python-examples wx2.8-examples

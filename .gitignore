@@ -1,7 +1,9 @@
 *.swp
+*.log
 arm-none-eabi-build/binutils-*
 arm-none-eabi-build/gcc-*
 arm-none-eabi-build/gdb-*
 arm-none-eabi-build/newlib-*
 tmp/
+
 

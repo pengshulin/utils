@@ -23,8 +23,10 @@ alias du='du -h'
 alias df='df -h'
 alias dpython='python -m pdb'
 alias lstty='ls /dev/tty[AU]*'
+alias lstty2='lsttybyid'
 alias lsttybyid="ls -l -o /dev/serial/by-id | awk '{n=split(\$10,sn,\"tty\"); if(n>1) print sn[2] \"\t\" \$8}' | sort"
 alias du.sort.less='du -h | sort -h | less +G'
+alias rr='repeat_run'
 
 alias mts0='miniterm.py /dev/ttyS0'
 alias mts1='miniterm.py /dev/ttyS1'
@@ -109,6 +111,10 @@ export EDITOR=vi
 #export PATH=$PATH:$DIR_UTILS/android-sdk-linux/platform-tools
 #export PATH=$PATH:$DIR_UTILS/android-sdk-linux/tools
 #export AP_PORT=9999
+
+export GOPATH='/home/trees/go/'
+export GOROOT='/usr/local/go'
+
 
 test -f ~/.extrarc && source ~/.extrarc
 

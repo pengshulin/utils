@@ -46,6 +46,8 @@
   control + alt + 3
 "xrandr.mode 4"  # select 4th monitor
   control + alt + 4
+"xrandr.mode 5"  # select 5th monitor
+  control + alt + 5
 "xrandr.mode c+"  # rotate current monitor clockwise
   control + alt + equal
 "xrandr.mode c-"  # rotate current monitor anti-clockwise
