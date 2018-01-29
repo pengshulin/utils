@@ -12,8 +12,6 @@
 # applications
 "firefox"
   control + alt + f
-"goldendict"
-  control + alt + g
 "mousepad"
   control + alt + n
 "thunar"
