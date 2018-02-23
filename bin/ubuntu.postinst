@@ -24,7 +24,7 @@ $INSTALL meld colordiff
 $INSTALL medit xournal alarm-clock-applet
 $INSTALL autoconf
 $INSTALL unison unison-gtk
-$INSTALL synaptic bmon traceroute xdotool
+$INSTALL synaptic bmon traceroute xdotool iftop nmap
 $INSTALL inotify-tools
 
 # security
@@ -42,7 +42,7 @@ $INSTALL goldendict stardict sdcv
 $INSTALL pdfmod pdfshuffler rednotebook
 $INSTALL markdown python-markdown retext pandoc 
 $INSTALL antiword
-$INSTALL samba system-config-samba
+#$INSTALL samba system-config-samba
 $INSTALL dos2unix
 $INSTALL blender
 $INSTALL librecad
@@ -104,7 +104,7 @@ $INSTALL octave gnuplot
 $INSTALL veusz
 
 # copy vsftpd configuration files to /etc/vsftpd.*
-$INSTALL vsftpd
+#$INSTALL vsftpd
 $INSTALL php5
 #INSTALL apache2
 $INSTALL sqliteman sqlitebrowser
