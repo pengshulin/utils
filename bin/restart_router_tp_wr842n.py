@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding:utf8
+# Restart router TP-WR842N
 # 重启路由器TP-WR842N
 # Peng Shulin <trees_peng@163.com>
 import time
