@@ -6,17 +6,17 @@ pushd ~
 if [[ -d ~/.stlink ]]; then
 pushd .stlink
 git pull
-make clean
 else
 git clone git://github.com/texane/stlink.git ~/.stlink
 pushd .stlink
 fi
 
-./autogen.sh
-./configure
-# TODO: patch 
-make
+make clean
+make 
+pushd build/Release
 sudo make install
+sudo ldconfig
+popd
 popd
 popd
 
