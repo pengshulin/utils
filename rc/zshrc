@@ -67,6 +67,20 @@ alias mtr7='miniterm.py /dev/rfcomm7'
 alias mtr8='miniterm.py /dev/rfcomm8'
 alias mtr9='miniterm.py /dev/rfcomm9'
 
+alias mtR0='miniterm.py /dev/shm/ttyRemote0'
+alias mtR1='miniterm.py /dev/shm/ttyRemote1'
+alias mtR2='miniterm.py /dev/shm/ttyRemote2'
+alias mtR3='miniterm.py /dev/shm/ttyRemote3'
+alias mtR4='miniterm.py /dev/shm/ttyRemote4'
+alias mtR5='miniterm.py /dev/shm/ttyRemote5'
+alias mtR6='miniterm.py /dev/shm/ttyRemote6'
+alias mtR7='miniterm.py /dev/shm/ttyRemote7'
+alias mtR8='miniterm.py /dev/shm/ttyRemote8'
+alias mtR9='miniterm.py /dev/shm/ttyRemote9'
+
+
+
+
 alias mk='make'
 alias mkc='make clean'
 alias mkf='make flash'

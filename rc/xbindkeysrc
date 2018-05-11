@@ -12,6 +12,8 @@
 # applications
 "firefox"
   control + alt + f
+"chromium-browser"
+  control + alt + c
 "mousepad"
   control + alt + n
 "thunar"
@@ -30,6 +32,9 @@
   control + alt + z
 "vokoscreen"
   control + alt + v
+"goldendict"
+  control + alt + g
+
 
 
 
