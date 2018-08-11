@@ -52,6 +52,11 @@ def getFlashFile():
     else:     
         search_name = '*.%s'% typename
     search_result = glob(search_name)
+    if not getenv_bool("DEBUG"):
+        # remove *_dbg.*' when DEBUG=0
+        for f in search_result:
+            if f.find('_dbg.') >= 0:
+                search_result.remove(f)
     if not search_result:
         return None
     else:

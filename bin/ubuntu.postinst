@@ -26,6 +26,7 @@ $INSTALL autoconf
 $INSTALL unison unison-gtk
 $INSTALL synaptic bmon traceroute xdotool iftop nmap
 $INSTALL inotify-tools
+$INSTALL lftp ncftp
 
 # security
 $INSTALL encfs cryptkeeper
@@ -39,7 +40,7 @@ $INSTALL fonts-inconsolata ttf-unifont
 $INSTALL fonts-wqy-microhei fonts-wqy-zenhei
 $INSTALL freeplane libreoffice espeak xchm kile okular fbreader
 $INSTALL goldendict stardict sdcv 
-$INSTALL pdfmod pdfshuffler rednotebook
+$INSTALL pdfmod pdfshuffler rednotebook pdfsam
 $INSTALL markdown python-markdown retext pandoc 
 $INSTALL antiword
 #$INSTALL samba system-config-samba

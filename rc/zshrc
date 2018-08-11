@@ -24,9 +24,12 @@ alias df='df -h'
 alias dpython='python -m pdb'
 alias lstty='ls /dev/tty[AU]*'
 alias lstty2='lsttybyid'
-alias lsttybyid="ls -l -o /dev/serial/by-id | awk '{n=split(\$10,sn,\"tty\"); if(n>1) print sn[2] \"\t\" \$8}' | sort"
+alias lsttybyid="ls -l -o /dev/serial/by-id | awk '{n=split(\$10,sn,\"tty\"); if(n>1) print sn[2] \"\t\" \"/dev/serial/by-id/\"  \$8}' | sort"
 alias du.sort.less='du -h | sort -h | less +G'
 alias rr='repeat_run'
+alias killall9='killall -9'
+alias k9='killall -9'
+alias k9cgdb='killall -9 cgdb'
 
 alias mts0='miniterm.py /dev/ttyS0'
 alias mts1='miniterm.py /dev/ttyS1'
@@ -84,6 +87,7 @@ alias mtR9='miniterm.py /dev/shm/ttyRemote9'
 alias mk='make'
 alias mkc='make clean'
 alias mkf='make flash'
+alias mksf='make stflash'
 alias mkr='make reset'
 alias rmk='make clean && make'
 
