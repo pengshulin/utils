@@ -3,7 +3,7 @@
 # add date mark to the filename and put it on parent directory
 
 DIR=`pwd`
-NAME=`basename $DIR`
+NAME=`basename "$DIR"`
 DATE=`date +%y%m%d`
 
 tar czvf ../$NAME-$DATE.tar.gz  ../$NAME/

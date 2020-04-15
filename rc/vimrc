@@ -34,6 +34,8 @@ if filereadable("Makefile") || filereadable("makefile")
     map <F9>   <ESC>:make<CR>
 elseif filereadable("SConstruct")
     map <F9>   <ESC>:!scons<CR>
+elseif filereadable("update")
+    map <F9>   <ESC>:!./update<CR>
 endif
 
 " F10 call build clean
@@ -41,6 +43,8 @@ if filereadable("Makefile") || filereadable("makefile")
     map <F10>   <ESC>:make clean<CR>
 elseif filereadable("SConstruct")
     map <F10>   <ESC>:!scons -c<CR>
+elseif filereadable("clean")
+    map <F10>   <ESC>:!./clean<CR>
 endif
 
 " THIS KEY MAY BE FILTERED
@@ -68,7 +72,7 @@ map <F7>  <ESC>:cp<CR>
 map <F8>  <ESC>:cn<CR>
 
 " author info
-map <C-\>    <ESC>aPeng Shulin <trees_peng@163.com> 2018<cr><ESC>
+map <C-\>    <ESC>aPeng Shulin <trees_peng@163.com> 2020<cr><ESC>
 
 
 "set modeline
